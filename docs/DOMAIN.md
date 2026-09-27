@@ -33,9 +33,17 @@ EquipmentType  1 ── * Equipment
 
 ## Log entry
 
-**Common header:** machine, author, entry date, event date (may differ from the entry date),
-kind, title, text, source (call, email, messenger, site visit, remote), contact person
-(who reported it), machine owner at the time of the entry.
+**Structured header** (database columns, used for rules, filters and search):
+machine, author, entry date, event date (may differ from the entry date), kind, title,
+source (call, email, messenger, site visit, remote), contact person (who reported it),
+machine owner at the time of the entry, issue status.
+
+**Free text:** a description in raw Markdown, written like a messenger message; plain text is
+fine. The form suggests a short skeleton per kind (e.g. for an issue: symptoms, when it happens,
+what was checked). The author may amend the text later; previous versions are kept (ADR-0008).
+
+**Attachments:** any number of photos, scans, audio, video and documents per entry.
+Files are stored outside the database; the entry keeps their metadata (ADR-0007).
 
 **Kinds and their effect on current state:**
 

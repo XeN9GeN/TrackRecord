@@ -9,12 +9,14 @@ equipment can be edited by hand on the machine page, history and current state q
 ## Decision
 - Current state (machine owner and status; equipment assignment, state and software version)
   is stored in denormalized fields for fast display, but is changed **only** by
-  `core/services.py::create_log_entry()`, in the same transaction that creates the entry.
-- The service validates transitions: equipment already installed on another machine cannot be
-  installed; equipment can only be removed from the machine it is installed on; written-off
-  equipment cannot be installed.
+  `core/services.py::create_log_entry()`, in the same database transaction that creates the entry.
+- The service locks the affected rows (`select_for_update`) and validates transitions:
+  equipment already installed on another machine cannot be installed; equipment can only be
+  removed from the machine it is installed on; written-off equipment cannot be installed.
 - Log entries are never deleted. Fields that affect state are not editable after creation;
-  mistakes are corrected with a new entry. The author may amend text and attachments.
+  mistakes are corrected with a new entry.
+- The author may amend the title, the free text and add attachments. Previous versions of the
+  title and text are kept (`django-simple-history`) and the entry is marked as edited.
 - Manual edits of reference data through admin are tracked with `django-simple-history`.
 
 ## Consequences
