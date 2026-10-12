@@ -47,6 +47,7 @@ knowledge base linked from machine pages.
 | Document | Contents |
 |---|---|
 | [docs/DOMAIN.md](docs/DOMAIN.md) | Domain model: glossary, entities, log entry kinds |
+| [docs/ER_MODEL.md](docs/ER_MODEL.md) | ER model: tables, keys, constraints, indexes |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | MVP scope and what comes next |
 | [docs/adr/](docs/adr/) | Architecture decisions and their rationale |
 | [AGENTS.md](AGENTS.md) | Setup, commands and coding rules for developers and AI agents |

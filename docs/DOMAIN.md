@@ -18,6 +18,8 @@ The Russian column is the wording used in the UI and when talking to customers.
 
 ## Entities and relationships
 
+Columns, keys and constraints are in the [ER model](ER_MODEL.md).
+
 ```
 Counterparty   1 ── * ContactPerson
 Counterparty   1 ── * Machine         (current owner; a machine has exactly one owner at a time)
