@@ -1,15 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from django.core.exceptions import ValidationError
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.core.paginator import Paginator
 from django.db.models import Count, OuterRef, Q, Subquery, Value
 from django.db.models.functions import Concat, Trim
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 
-from .forms import FORM_KINDS, LogEntryForm
+from .forms import FORM_KINDS, AmendLogEntryForm, LogEntryForm
 from .models import IssueStatus, LogEntry, LogKind, Machine
-from .services import create_log_entry
+from .services import amend_log_entry, can_amend, create_log_entry
 
 
 @login_required
@@ -79,3 +79,35 @@ def log_entry_create(request, machine_pk):
             messages.success(request, _("Entry added."))
             return redirect("core:machine_detail", pk=machine.pk)
     return render(request, "core/log_entry_form.html", {"machine": machine, "form": form, "kind": kind})
+
+
+@login_required
+def log_entry_detail(request, pk):
+    entry = get_object_or_404(
+        LogEntry.objects.select_related("machine__model", "author", "contact", "equipment__type", "new_owner"),
+        pk=pk,
+    )
+    context = {
+        "entry": entry,
+        "revisions": entry.revisions.select_related("edited_by"),
+        "can_amend": can_amend(request.user, entry),
+    }
+    return render(request, "core/log_entry_detail.html", context)
+
+
+@login_required
+def log_entry_amend(request, pk):
+    entry = get_object_or_404(LogEntry.objects.select_related("machine__model"), pk=pk)
+    if not can_amend(request.user, entry):
+        raise PermissionDenied
+    form = AmendLogEntryForm(request.POST or None, initial={"title": entry.title, "text": entry.text})
+    if request.method == "POST" and form.is_valid():
+        try:
+            changed = amend_log_entry(entry, editor=request.user, **form.cleaned_data)
+        except ValidationError as error:
+            form.add_error(None, error)
+        else:
+            if changed:
+                messages.success(request, _("Entry updated, the previous version is kept."))
+            return redirect("core:log_entry_detail", pk=entry.pk)
+    return render(request, "core/log_entry_amend.html", {"entry": entry, "form": form})

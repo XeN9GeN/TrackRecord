@@ -2,7 +2,7 @@
 <li class="entry{% if entry.is_open_issue %} is-open-issue{% endif %}">
   <div class="entry-head">
     <span class="badge {{ entry.kind }}">{{ entry.get_kind_display }}</span>
-    <span class="entry-title">{{ entry.title }}</span>
+    <a class="entry-title" href="{% url 'core:log_entry_detail' entry.pk %}">{{ entry.title }}</a>
     {% if entry.issue_status %}<span class="badge {{ entry.issue_status }}">{{ entry.get_issue_status_display }}</span>{% endif %}
   </div>
   <div class="entry-meta">

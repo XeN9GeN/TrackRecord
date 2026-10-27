@@ -110,3 +110,22 @@ def test_new_entry_requires_permission(client, machine):
     client.force_login(User.objects.create_user("viewer"))
     response = client.get(reverse("core:log_entry_create", args=[machine.pk]))
     assert response.status_code == 403
+
+
+def test_author_amends_entry_and_sees_previous_version(client_logged_in, engineer, machine):
+    entry = create_log_entry(author=engineer, machine=machine, kind=LogKind.ISSUE, title="Stals")
+    response = client_logged_in.post(
+        reverse("core:log_entry_amend", args=[entry.pk]), {"title": "Stalls", "text": "At low speed"}
+    )
+    assert response.status_code == 302
+    response = client_logged_in.get(reverse("core:log_entry_detail", args=[entry.pk]))
+    assert [revision.title for revision in response.context["revisions"]] == ["Stals"]
+
+
+def test_other_user_cannot_amend(client, engineer, machine):
+    from django.contrib.auth.models import User
+
+    entry = create_log_entry(author=engineer, machine=machine, kind=LogKind.ISSUE, title="Stalls")
+    client.force_login(User.objects.create_user("other"))
+    response = client.post(reverse("core:log_entry_amend", args=[entry.pk]), {"title": "Hacked"})
+    assert response.status_code == 403

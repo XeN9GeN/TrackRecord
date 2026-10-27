@@ -16,7 +16,7 @@
         <h2>{% translate "Open issues" %} ({{ open_issues|length }})</h2>
         <ul>
           {% for issue in open_issues %}
-            <li>{{ issue.event_date|date:"d.m.Y" }} — {{ issue.title }}</li>
+            <li>{{ issue.event_date|date:"d.m.Y" }} — <a href="{% url 'core:log_entry_detail' issue.pk %}">{{ issue.title }}</a></li>
           {% endfor %}
         </ul>
       </section>
