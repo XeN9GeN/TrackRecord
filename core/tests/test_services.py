@@ -75,6 +75,27 @@ class TestCommon:
         machine.refresh_from_db()
         assert machine.last_contact_at is not None
 
+    def test_last_contact_comes_from_event_date(self, engineer, machine):
+        today = timezone.localdate()
+        create_log_entry(
+            author=engineer,
+            machine=machine,
+            kind=LogKind.REQUEST,
+            title="Call a month ago",
+            event_date=today - datetime.timedelta(days=30),
+        )
+        machine.refresh_from_db()
+        assert timezone.localdate(machine.last_contact_at) == today - datetime.timedelta(days=30)
+        create_log_entry(
+            author=engineer,
+            machine=machine,
+            kind=LogKind.REQUEST,
+            title="Older call recorded late",
+            event_date=today - datetime.timedelta(days=60),
+        )
+        machine.refresh_from_db()
+        assert timezone.localdate(machine.last_contact_at) == today - datetime.timedelta(days=30)
+
     def test_document_does_not_touch_machine_history(self, engineer, machine):
         create_log_entry(author=engineer, machine=machine, kind=LogKind.DOCUMENT, title="Manual")
         assert machine.history.count() == 1

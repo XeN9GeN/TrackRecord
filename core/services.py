@@ -1,5 +1,6 @@
 """The only place where machine and equipment state changes (ADR-0002)."""
 
+import datetime
 import unicodedata
 
 from django.core.exceptions import PermissionDenied, ValidationError
@@ -96,8 +97,10 @@ def create_log_entry(
 
     match kind:
         case LogKind.REQUEST:
-            machine.last_contact_at = timezone.now()
-            machine_fields = ["last_contact_at"]
+            contact_at = _event_moment(event_date)
+            if machine.last_contact_at is None or contact_at > machine.last_contact_at:
+                machine.last_contact_at = contact_at
+                machine_fields = ["last_contact_at"]
         case LogKind.ISSUE:
             entry.is_issue = True
             entry.issue_status = IssueStatus.OPEN
@@ -212,6 +215,13 @@ def _clean_text(text):
     if len(text) > TEXT_MAX_LENGTH:
         raise ValidationError(_("Text is too long."))
     return text
+
+
+def _event_moment(event_date):
+    """Now for today's events, otherwise the start of the event day: an entry made later keeps its real date."""
+    if event_date == timezone.localdate():
+        return timezone.now()
+    return timezone.make_aware(datetime.datetime.combine(event_date, datetime.time.min))
 
 
 def _require_installed_on(equipment, machine):
