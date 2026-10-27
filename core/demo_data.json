@@ -1,0 +1,102 @@
+{
+  "users": [
+    {"username": "ivanov", "first_name": "Алексей", "last_name": "Иванов", "group": "Engineer"},
+    {"username": "petrova", "first_name": "Мария", "last_name": "Петрова", "group": "Engineer"},
+    {"username": "admin", "first_name": "Сергей", "last_name": "Кузнецов", "group": "Administrator", "superuser": true}
+  ],
+  "counterparties": [
+    {
+      "name": "ТОО «Батыс Жол Сервис»",
+      "inn": "180940012345",
+      "region": "Западный Казахстан",
+      "contacts": [
+        {"full_name": "Ермеков Данияр Сапарович", "position": "директор", "phones": "+7 701 555-12-34", "email": "director@batys-zhol.example"},
+        {"full_name": "Шевченко Олег Петрович", "position": "начальник машины", "phones": "+7 705 210-44-10"}
+      ]
+    },
+    {
+      "name": "АО «Дальпутьремонт»",
+      "inn": "2724012345",
+      "region": "Дальневосточная железная дорога",
+      "contacts": [
+        {"full_name": "Ким Виктор Андреевич", "position": "главный механик", "phones": "+7 914 300-20-10", "email": "kim@dalput.example"}
+      ]
+    },
+    {
+      "name": "ООО «СибТрекМаш»",
+      "inn": "5406123456",
+      "region": "Западно-Сибирская железная дорога",
+      "contacts": [
+        {"full_name": "Лаптев Игорь Николаевич", "position": "бригадир", "phones": "+7 913 777-01-02"}
+      ]
+    }
+  ],
+  "machine_models": [
+    {"name": "Duomatic 09-32 CSM", "manufacturer": "Plasser & Theurer"},
+    {"name": "ВПР-02М", "manufacturer": "Ремпутьмаш"},
+    {"name": "Unimat 08-275", "manufacturer": "Plasser & Theurer"}
+  ],
+  "equipment": [
+    {"type": "Контроллер управления", "serial_number": "CU-23-0141", "production_year": 2023, "software_version": "2.3.0"},
+    {"type": "Дисплей оператора", "serial_number": "OD-22-0510", "production_year": 2022},
+    {"type": "Модуль GNSS", "serial_number": "GN-23-0077", "production_year": 2023, "software_version": "1.8"},
+    {"type": "Контроллер управления", "serial_number": "CU-21-0032", "production_year": 2021, "software_version": "2.1.4"},
+    {"type": "Датчик положения", "serial_number": "PS-21-1180", "production_year": 2021},
+    {"type": "Контроллер управления", "serial_number": "CU-24-0203", "production_year": 2024, "software_version": "2.4.1"},
+    {"type": "Датчик положения", "serial_number": "PS-24-2045", "production_year": 2024},
+    {"type": "Дисплей оператора", "serial_number": "OD-20-0099", "production_year": 2020}
+  ],
+  "written_off_from_stock": [
+    {"serial_number": "OD-20-0099", "days_ago": 60, "author": "petrova", "title": "Дисплей списан: разбит при транспортировке", "text": "Повреждение корпуса и матрицы, ремонт нецелесообразен."}
+  ],
+  "machines": [
+    {
+      "model": "Duomatic 09-32 CSM",
+      "factory_number": "67",
+      "history": [
+        {"days_ago": 420, "kind": "ownership_change", "author": "admin", "source": "email", "title": "Машина передана новому владельцу", "new_owner": "ТОО «Батыс Жол Сервис»", "text": "Договор на поставку и монтаж системы подписан."},
+        {"days_ago": 418, "kind": "status_change", "author": "admin", "source": "other", "title": "Машина в эксплуатации", "new_status": "in_service"},
+        {"days_ago": 410, "kind": "equipment_install", "author": "ivanov", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "CU-23-0141", "software_version": "2.3.0", "text": "Монтаж в кабине оператора, питание от штатной сети 24 В.\n\nАкт приёмки подписан начальником машины."},
+        {"days_ago": 410, "kind": "equipment_install", "author": "ivanov", "source": "site_visit", "title": "Установлен дисплей оператора", "equipment": "OD-22-0510"},
+        {"days_ago": 409, "kind": "equipment_install", "author": "ivanov", "source": "site_visit", "title": "Установлен модуль GNSS", "equipment": "GN-23-0077", "software_version": "1.8", "text": "Антенна на крыше кабины, кабель проложен в общем жгуте."},
+        {"days_ago": 300, "kind": "request", "author": "petrova", "source": "phone", "contact": "Шевченко Олег Петрович", "title": "Вопрос по калибровке датчиков", "text": "**Вопрос:** как перекалибровать датчики после замены колёсной пары.\n\n**Ответ / договорились:** выслали инструкцию на почту."},
+        {"ref": "stall", "days_ago": 200, "kind": "issue", "author": "petrova", "source": "messenger", "contact": "Шевченко Олег Петрович", "title": "Машина глохнет при движении", "text": "**Симптомы:** при движении на скорости выше 5 км/ч двигатель глохнет, на дисплее ошибка E-214.\n\n**Когда проявляется:** после прогрева, примерно через час работы.\n\n**Что проверили:** питание контроллера в норме. Механик прислал видео в мессенджер."},
+        {"ref": "harness", "days_ago": 150, "kind": "issue", "author": "petrova", "source": "phone", "contact": "Ермеков Данияр Сапарович", "title": "Оборван жгут датчика положения", "text": "Директор сообщил, что при ремонте рамы повредили проводку нашей системы. Просит схемы подключения."},
+        {"days_ago": 140, "kind": "maintenance", "author": "ivanov", "source": "site_visit", "title": "Восстановлен жгут датчика положения", "resolves": ["harness"], "text": "**Что сделано:** заменён участок жгута 1,5 м, разъёмы перепаяны.\n\n**Результат:** датчик работает, показания стабильные. Схемы подключения переданы механику."},
+        {"days_ago": 120, "kind": "software_update", "author": "ivanov", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "CU-23-0141", "software_version": "2.4.1", "text": "Исправлена обработка сигнала датчика положения на высокой скорости."},
+        {"days_ago": 100, "kind": "document", "author": "admin", "source": "email", "title": "Акт выполненных работ за II квартал", "text": "Подписанный акт получен от заказчика."},
+        {"days_ago": 30, "kind": "request", "author": "petrova", "source": "phone", "contact": "Шевченко Олег Петрович", "title": "Плановый звонок: состояние машины", "text": "Машина работает на перегоне, замечаний по системе нет, кроме остановок двигателя — ждут выезда."},
+        {"days_ago": 6, "kind": "issue", "author": "petrova", "source": "messenger", "contact": "Шевченко Олег Петрович", "title": "Не сохраняются настройки после перезапуска", "text": "После выключения питания сбрасываются параметры подбивки, приходится вводить заново."}
+      ]
+    },
+    {
+      "model": "ВПР-02М",
+      "factory_number": "215",
+      "history": [
+        {"days_ago": 700, "kind": "ownership_change", "author": "admin", "source": "other", "title": "Владелец по данным договора", "new_owner": "АО «Дальпутьремонт»"},
+        {"days_ago": 700, "kind": "status_change", "author": "admin", "source": "other", "title": "Машина в эксплуатации", "new_status": "in_service"},
+        {"days_ago": 690, "kind": "equipment_install", "author": "ivanov", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "CU-21-0032", "software_version": "2.1.4"},
+        {"days_ago": 690, "kind": "equipment_install", "author": "ivanov", "source": "site_visit", "title": "Установлен датчик положения", "equipment": "PS-21-1180"},
+        {"days_ago": 250, "kind": "maintenance", "author": "ivanov", "source": "site_visit", "contact": "Ким Виктор Андреевич", "title": "Плановое ТО системы", "text": "Проверены разъёмы и крепления, обновлена калибровка."},
+        {"days_ago": 90, "kind": "equipment_removal", "author": "ivanov", "source": "site_visit", "title": "Снят контроллер перед продажей машины", "equipment": "CU-21-0032", "text": "Контроллер возвращён на склад."},
+        {"days_ago": 88, "kind": "ownership_change", "author": "admin", "source": "email", "contact": "Ким Виктор Андреевич", "title": "Машина продана", "new_owner": "ООО «СибТрекМаш»", "text": "Датчик положения остался на машине, новый владелец заинтересован в установке контроллера."}
+      ]
+    },
+    {
+      "model": "Unimat 08-275",
+      "factory_number": "3412",
+      "history": [
+        {"days_ago": 60, "kind": "ownership_change", "author": "admin", "source": "email", "title": "Новый заказчик", "new_owner": "ООО «СибТрекМаш»"},
+        {"days_ago": 60, "kind": "status_change", "author": "admin", "source": "other", "title": "Машина в эксплуатации", "new_status": "in_service"},
+        {"days_ago": 45, "kind": "equipment_install", "author": "petrova", "source": "site_visit", "contact": "Лаптев Игорь Николаевич", "title": "Установлен комплект системы", "equipment": "CU-24-0203", "software_version": "2.4.1"},
+        {"days_ago": 45, "kind": "equipment_install", "author": "petrova", "source": "site_visit", "title": "Установлен датчик положения", "equipment": "PS-24-2045"},
+        {"days_ago": 12, "kind": "issue", "author": "ivanov", "source": "phone", "contact": "Лаптев Игорь Николаевич", "title": "Расхождение показаний датчика положения", "text": "Отклонение до 4 мм на прямом участке."}
+      ]
+    },
+    {
+      "model": "Duomatic 09-32 CSM",
+      "factory_number": "71",
+      "history": []
+    }
+  ]
+}

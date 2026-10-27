@@ -129,3 +129,20 @@ def test_other_user_cannot_amend(client, engineer, machine):
     client.force_login(User.objects.create_user("other"))
     response = client.post(reverse("core:log_entry_amend", args=[entry.pk]), {"title": "Hacked"})
     assert response.status_code == 403
+
+
+def test_seed_demo_fills_empty_database(db, client):
+    from django.core.management import call_command
+
+    from core.models import Machine
+
+    call_command("seed_demo", password="x-demo-pass-1")
+    machine = Machine.objects.get(factory_number="67")
+    assert machine.current_owner is not None
+    assert machine.log_entries.filter(issue_status="open").count() == 2
+    from django.contrib.auth.models import User
+
+    ivanov = User.objects.get(username="ivanov")
+    assert ivanov.check_password("x-demo-pass-1")
+    client.force_login(ivanov)
+    assert client.get(reverse("core:machine_detail", args=[machine.pk])).status_code == 200
