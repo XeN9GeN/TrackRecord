@@ -2,7 +2,8 @@
 
 Logical data model of TrackRecord for PostgreSQL 16 (ADR-0006). Terms are explained in
 [DOMAIN.md](DOMAIN.md); the rules behind the constraints are in [ADR-0002](adr/0002-log-as-source-of-truth.md),
-[ADR-0007](adr/0007-attachments-outside-db.md) and [ADR-0008](adr/0008-markdown-free-text.md).
+[ADR-0007](adr/0007-attachments-outside-db.md), [ADR-0008](adr/0008-markdown-free-text.md),
+[ADR-0010](adr/0010-log-entry-revisions-table.md) and [ADR-0011](adr/0011-equipment-write-off-without-machine.md).
 Table names are given without the Django app prefix (`core_`).
 
 ## Diagram
@@ -62,7 +63,7 @@ erDiagram
     }
     LOG_ENTRY {
         bigint id PK
-        bigint machine_id FK
+        bigint machine_id FK "nullable only for write-off"
         bigint author_id FK
         timestamptz created_at
         date event_date
@@ -111,7 +112,7 @@ erDiagram
     MACHINE_MODEL ||--o{ MACHINE : "is model of"
     EQUIPMENT_TYPE ||--o{ EQUIPMENT : "classifies"
     MACHINE |o--o{ EQUIPMENT : "has installed"
-    MACHINE ||--o{ LOG_ENTRY : "has history"
+    MACHINE |o--o{ LOG_ENTRY : "has history"
     USER ||--o{ LOG_ENTRY : "authors"
     CONTACT_PERSON |o--o{ LOG_ENTRY : "reported"
     COUNTERPARTY |o--o{ LOG_ENTRY : "owner at entry time"
@@ -228,7 +229,7 @@ resolves the issue) and `title`, `text`, `edited_at` (author's amendment, old ve
 | Column | Type | Notes |
 |---|---|---|
 | `id` | bigint | PK |
-| `machine_id` | bigint | FK → machine, `PROTECT` |
+| `machine_id` | bigint | FK → machine, nullable, `PROTECT`: only `equipment_write_off` may have no machine (ADR-0011) |
 | `author_id` | bigint | FK → user, `PROTECT` |
 | `created_at` | timestamptz | when the entry was recorded |
 | `event_date` | date | when the event happened; may be earlier than `created_at` |
@@ -251,6 +252,7 @@ resolves the issue) and `title`, `text`, `edited_at` (author's amendment, old ve
 | `edited_at` | timestamptz | nullable: last amendment of title or text |
 
 Constraints (kind-specific fields):
+- `machine_id IS NOT NULL OR kind = 'equipment_write_off'`.
 - `kind IN ('equipment_install','equipment_removal','equipment_write_off','software_update')` ⇔ `equipment_id IS NOT NULL`.
 - `kind IN ('equipment_install','software_update')` ⇒ `software_version IS NOT NULL`.
 - `kind = 'ownership_change'` ⇔ `new_owner_id IS NOT NULL`.
@@ -265,7 +267,8 @@ Indexes:
 - GIN on `search_vector`: full-text search in Russian.
 
 ### log_entry_revision
-Previous versions of an entry's title and text when its author amends them (ADR-0002, ADR-0008).
+Previous versions of an entry's title and text when its author amends them (ADR-0008, ADR-0010).
+`log_entry` itself is not tracked by `django-simple-history`.
 
 | Column | Type | Notes |
 |---|---|---|
@@ -302,7 +305,7 @@ Metadata of a file attached to a log entry. The file itself lives in storage, no
 | `maintenance` | selected open issues get `issue_status = 'resolved'`, `resolved_by_id`, `resolved_at` |
 | `equipment_install` | `equipment.state = 'installed'`, `current_machine_id`, `software_version` (row locked; rejected if not `in_stock` / `removed`) |
 | `equipment_removal` | `equipment.state = 'removed'`, `current_machine_id = NULL` (only from the machine it is installed on) |
-| `equipment_write_off` | `equipment.state = 'written_off'`, `current_machine_id = NULL` |
+| `equipment_write_off` | `equipment.state = 'written_off'`, `current_machine_id = NULL` (machine required if the equipment is installed, and must be that machine) |
 | `software_update` | `equipment.software_version` |
 | `ownership_change` | `machine.current_owner_id` |
 | `status_change` | `machine.status` |

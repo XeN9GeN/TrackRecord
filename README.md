@@ -33,7 +33,7 @@ configuration and open issues, backed by the full history.
 | Database | PostgreSQL 16 in development, tests and production; Russian full-text search, `pg_trgm` (ADR-0006) |
 | Free text | Raw Markdown in the database, rendered with `markdown-it-py` and sanitised with `nh3` (ADR-0008) |
 | Attachments | Outside the database: local volume in the MVP, S3-compatible storage later via `django-storages`; served by nginx after an auth check (ADR-0007) |
-| History | The log itself (ADR-0002) plus `django-simple-history` |
+| History | The log itself (ADR-0002), text revisions of log entries (ADR-0010), `django-simple-history` for reference data |
 | Auth | Local Django accounts with groups and `django-axes`; AD/LDAP or SSO later (ADR-0004) |
 | UI language | English codebase, Russian UI via Django i18n (ADR-0005) |
 | Runtime | gunicorn behind nginx, deployed with `docker compose` in the internal network |
@@ -54,5 +54,5 @@ knowledge base linked from machine pages.
 
 ## Status
 
-Design is done, MVP development is in progress (branch `feature/mvp`).
+Design is done, MVP development is in progress (see [ROADMAP](docs/ROADMAP.md)).
 See [AGENTS.md](AGENTS.md) for local setup.
