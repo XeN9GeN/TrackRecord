@@ -2,7 +2,7 @@
 
 import unicodedata
 
-from django.core.exceptions import ValidationError
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import gettext as _
@@ -14,6 +14,7 @@ from .models import (
     EquipmentState,
     IssueStatus,
     LogEntry,
+    LogEntryRevision,
     LogKind,
     LogSource,
     Machine,
@@ -52,15 +53,11 @@ def create_log_entry(
     Raises ValidationError if the entry is not allowed in the current state.
     """
     kind = LogKind(kind)
-    title = " ".join(normalize_text(title).split())
-    text = normalize_text(text)
+    title = _clean_title(title)
+    text = _clean_text(text)
     event_date = event_date or timezone.localdate()
     software_version = software_version.strip() if software_version else None
 
-    if not title:
-        raise ValidationError(_("Title is required."))
-    if len(text) > TEXT_MAX_LENGTH:
-        raise ValidationError(_("Text is too long."))
     if event_date > timezone.localdate():
         raise ValidationError(_("Event date cannot be in the future."))
     _reject_unused_fields(
@@ -172,6 +169,49 @@ def create_log_entry(
         issue.resolved_at = now
         issue.save(update_fields=["issue_status", "resolved_by", "resolved_at"])
     return entry
+
+
+def can_amend(user, entry):
+    return user.is_superuser or entry.author_id == user.pk
+
+
+@transaction.atomic
+def amend_log_entry(entry, *, editor, title, text):
+    """Change an entry's title and text, keeping the previous version (ADR-0010).
+
+    Only the author (or a superuser) may amend; state-changing fields are never edited.
+    Returns True if anything changed.
+    """
+    entry = LogEntry.objects.select_for_update().get(pk=entry.pk)
+    if not can_amend(editor, entry):
+        raise PermissionDenied
+    title = _clean_title(title)
+    text = _clean_text(text)
+    if title == entry.title and text == entry.text:
+        return False
+    now = timezone.now()
+    LogEntryRevision.objects.create(
+        log_entry=entry, title=entry.title, text=entry.text, edited_by=editor, edited_at=now
+    )
+    entry.title = title
+    entry.text = text
+    entry.edited_at = now
+    entry.save(update_fields=["title", "text", "edited_at"])
+    return True
+
+
+def _clean_title(title):
+    title = " ".join(normalize_text(title).split())
+    if not title:
+        raise ValidationError(_("Title is required."))
+    return title
+
+
+def _clean_text(text):
+    text = normalize_text(text)
+    if len(text) > TEXT_MAX_LENGTH:
+        raise ValidationError(_("Text is too long."))
+    return text
 
 
 def _require_installed_on(equipment, machine):
