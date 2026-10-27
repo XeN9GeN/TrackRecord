@@ -1,0 +1,28 @@
+{% load i18n markdown_tags %}
+<li class="entry{% if entry.is_open_issue %} is-open-issue{% endif %}">
+  <div class="entry-head">
+    <span class="badge {{ entry.kind }}">{{ entry.get_kind_display }}</span>
+    <a class="entry-title" href="{% url 'core:log_entry_detail' entry.pk %}">{{ entry.title }}</a>
+    {% if entry.issue_status %}<span class="badge {{ entry.issue_status }}">{{ entry.get_issue_status_display }}</span>{% endif %}
+  </div>
+  <div class="entry-meta">
+    {{ entry.event_date|date:"d.m.Y" }} · {{ entry.author.get_full_name|default:entry.author.username }}
+    · {{ entry.get_source_display }}
+    {% if entry.contact %} · {% translate "reported by" %} {{ entry.contact.full_name }}{% endif %}
+    {% if entry.edited_at %} · <span title="{{ entry.edited_at|date:'d.m.Y H:i' }}">{% translate "edited" %}</span>{% endif %}
+  </div>
+  {% if entry.equipment or entry.new_owner or entry.new_status or entry.resolved_issues.all %}
+    <div class="entry-effect">
+      {% if entry.equipment %}{{ entry.equipment }}{% if entry.software_version %}, {% translate "software" %} {{ entry.software_version }}{% endif %}{% endif %}
+      {% if entry.new_owner %}{% translate "New owner" %}: {{ entry.new_owner }}{% endif %}
+      {% if entry.new_status %}{% translate "New status" %}: {{ entry.get_new_status_display }}{% endif %}
+      {% for issue in entry.resolved_issues.all %}
+        {% if forloop.first %}{% translate "Resolved" %}:{% endif %} {{ issue.title }}{% if not forloop.last %};{% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if entry.resolved_by %}
+    <div class="entry-effect muted">{% translate "Resolved by" %} «{{ entry.resolved_by.title }}», {{ entry.resolved_at|date:"d.m.Y" }}</div>
+  {% endif %}
+  {% if entry.text %}<div class="markdown">{{ entry.text|render_markdown }}</div>{% endif %}
+</li>

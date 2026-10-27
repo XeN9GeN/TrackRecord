@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n markdown_tags %}
+
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block content %}
+{% if entry.machine %}<p><a href="{% url 'core:machine_detail' entry.machine.pk %}">← {{ entry.machine }}</a></p>{% endif %}
+<section class="card">
+  <div class="row">
+    <span></span>
+    {% if can_amend %}<a class="button" href="{% url 'core:log_entry_amend' entry.pk %}">{% translate "Edit text" %}</a>{% endif %}
+  </div>
+  <ul class="feed">{% include "core/_entry.html" %}</ul>
+  <dl class="facts">
+    <dt>{% translate "Recorded at" %}</dt><dd>{{ entry.created_at|date:"d.m.Y H:i" }}</dd>
+    {% if entry.owner_snapshot %}<dt>{% translate "Owner at the time" %}</dt><dd>{{ entry.owner_snapshot }}</dd>{% endif %}
+  </dl>
+</section>
+
+{% if revisions %}
+  <section class="card">
+    <h2>{% translate "Previous versions" %}</h2>
+    <ul class="feed">
+      {% for revision in revisions %}
+        <li class="entry">
+          <div class="entry-meta">
+            {% blocktranslate with date=revision.edited_at|date:"d.m.Y H:i" %}Replaced on {{ date }}{% endblocktranslate %}
+            · {{ revision.edited_by.get_full_name|default:revision.edited_by.username }}
+          </div>
+          <div class="entry-title">{{ revision.title }}</div>
+          {% if revision.text %}<div class="markdown">{{ revision.text|render_markdown }}</div>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
+{% endblock %}

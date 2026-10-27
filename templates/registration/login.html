@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Sign in" %}{% endblock %}
+
+{% block content %}
+<section class="card narrow">
+  <h1>{% translate "Sign in" %}</h1>
+  {% if form.non_field_errors %}
+    <div class="errors">{{ form.non_field_errors }}</div>
+  {% endif %}
+  <form method="post" class="form">
+    {% csrf_token %}
+    <label for="{{ form.username.id_for_label }}">{% translate "Username" %}</label>
+    {{ form.username }}
+    <label for="{{ form.password.id_for_label }}">{% translate "Password" %}</label>
+    {{ form.password }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="button primary">{% translate "Sign in" %}</button>
+  </form>
+</section>
+{% endblock %}

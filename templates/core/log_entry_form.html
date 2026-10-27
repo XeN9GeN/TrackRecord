@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ kind.label }}{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'core:machine_detail' machine.pk %}">← {{ machine }}</a></p>
+<section class="card">
+  <div class="row">
+    <h1>{{ kind.label }}</h1>
+    <a href="?">{% translate "Change kind" %}</a>
+  </div>
+  {% include "core/_form.html" with submit_label=_("Save entry") %}
+</section>
+{% endblock %}

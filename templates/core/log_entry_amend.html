@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Edit entry" %}{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'core:log_entry_detail' entry.pk %}">← {{ entry.title }}</a></p>
+<section class="card">
+  <h1>{% translate "Edit entry" %}</h1>
+  <p class="muted">{% translate "Only the title and text can be changed. The previous version will be kept; to correct facts, add a new entry." %}</p>
+  {% include "core/_form.html" with submit_label=_("Save") %}
+</section>
+{% endblock %}
