@@ -1,0 +1,16 @@
+# systemd unit for gunicorn. Install: see docs/DEPLOY.md.
+[Unit]
+Description=TrackRecord (gunicorn)
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+User=mannobody
+Group=mannobody
+WorkingDirectory=/home/mannobody/TrackRecord
+ExecStart=/home/mannobody/TrackRecord/.venv/bin/gunicorn config.wsgi \
+    --bind 127.0.0.1:8000 --workers 3 --access-logfile -
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
