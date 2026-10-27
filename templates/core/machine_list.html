@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Machines" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <h1>{% translate "Machines" %}</h1>
+  {% if perms.core.add_machine %}
+    <a class="button" href="{% url 'admin:core_machine_add' %}">{% translate "Add machine" %}</a>
+  {% endif %}
+</div>
+
+<form method="get" class="search">
+  <input type="search" name="q" value="{{ query }}" placeholder="{% translate 'Number, model, owner or region' %}">
+  <button type="submit" class="button">{% translate "Find" %}</button>
+</form>
+
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>{% translate "Machine" %}</th>
+        <th>{% translate "Owner" %}</th>
+        <th>{% translate "Region" %}</th>
+        <th>{% translate "Status" %}</th>
+        <th>{% translate "Open issues" %}</th>
+        <th>{% translate "Last contact" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for machine in machines %}
+        <tr>
+          <td><a href="{% url 'core:machine_detail' machine.pk %}">{{ machine }}</a></td>
+          <td>{{ machine.current_owner|default:"—" }}</td>
+          <td>{{ machine.current_owner.region|default:"—" }}</td>
+          <td><span class="badge {{ machine.status }}">{{ machine.get_status_display }}</span></td>
+          <td>{% if machine.open_issues %}<span class="badge open">{{ machine.open_issues }}</span>{% else %}—{% endif %}</td>
+          <td>{{ machine.last_contact_at|date:"d.m.Y"|default:"—" }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6" class="muted">{% translate "No machines found." %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ machine }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <h1>{{ machine }}</h1>
+  <span class="badge {{ machine.status }}">{{ machine.get_status_display }}</span>
+</div>
+
+<div class="grid">
+  <div>
+    {% if open_issues %}
+      <section class="card issues">
+        <h2>{% translate "Open issues" %} ({{ open_issues|length }})</h2>
+        <ul>
+          {% for issue in open_issues %}
+            <li>{{ issue.event_date|date:"d.m.Y" }} — {{ issue.title }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    <section class="card">
+      <h2>{% translate "Installed equipment" %}</h2>
+      {% if installed %}
+        <table>
+          <thead>
+            <tr>
+              <th>{% translate "Type" %}</th>
+              <th>{% translate "Serial number" %}</th>
+              <th>{% translate "Year" %}</th>
+              <th>{% translate "Software" %}</th>
+              <th>{% translate "Installed" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for unit in installed %}
+              <tr>
+                <td>{{ unit.type }}</td>
+                <td>{{ unit.serial_number }}</td>
+                <td>{{ unit.production_year|default:"—" }}</td>
+                <td>{{ unit.software_version|default:"—" }}</td>
+                <td>{{ unit.installed_on|date:"d.m.Y"|default:"—" }}{% if unit.installed_by %}, {{ unit.installed_by }}{% endif %}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p class="muted">{% translate "No equipment installed." %}</p>
+      {% endif %}
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <h2>{% translate "History" %}</h2>
+        {% block new_entry %}{% endblock %}
+      </div>
+      {% if kind_filter %}
+        <nav class="filters">
+          <a href="?" class="{% if not selected_kind %}active{% endif %}">{% translate "All" %}</a>
+          {% for value, label in kind_filter %}
+            <a href="?kind={{ value }}" class="{% if value == selected_kind %}active{% endif %}">{{ label }}</a>
+          {% endfor %}
+        </nav>
+      {% endif %}
+      <ul class="feed">
+        {% for entry in page %}
+          {% include "core/_entry.html" %}
+        {% empty %}
+          <li class="muted">{% translate "No entries yet." %}</li>
+        {% endfor %}
+      </ul>
+      {% if page.has_other_pages %}
+        <nav class="filters">
+          {% if page.has_previous %}<a href="?kind={{ selected_kind }}&page={{ page.previous_page_number }}">← {% translate "Newer" %}</a>{% endif %}
+          <span class="muted">{{ page.number }} / {{ page.paginator.num_pages }}</span>
+          {% if page.has_next %}<a href="?kind={{ selected_kind }}&page={{ page.next_page_number }}">{% translate "Older" %} →</a>{% endif %}
+        </nav>
+      {% endif %}
+    </section>
+  </div>
+
+  <aside>
+    <section class="card">
+      <h2>{% translate "Owner" %}</h2>
+      {% if machine.current_owner %}
+        <dl class="facts">
+          <dt>{% translate "Counterparty" %}</dt><dd>{{ machine.current_owner }}</dd>
+          <dt>{% translate "Region" %}</dt><dd>{{ machine.current_owner.region|default:"—" }}</dd>
+          <dt>{% translate "INN" %}</dt><dd>{{ machine.current_owner.inn|default:"—" }}</dd>
+        </dl>
+        {% if contacts %}
+          <h3>{% translate "Contacts" %}</h3>
+          <ul class="feed">
+            {% for contact in contacts %}
+              <li>
+                <strong>{{ contact.full_name }}</strong>{% if contact.position %}, {{ contact.position }}{% endif %}<br>
+                <span class="muted">{{ contact.phones }}{% if contact.phones and contact.email %} · {% endif %}{{ contact.email }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% else %}
+        <p class="muted">{% translate "Owner is not recorded yet." %}</p>
+      {% endif %}
+    </section>
+
+    <section class="card">
+      <h2>{% translate "Machine" %}</h2>
+      <dl class="facts">
+        <dt>{% translate "Model" %}</dt><dd>{{ machine.model }}</dd>
+        <dt>{% translate "Manufacturer" %}</dt><dd>{{ machine.model.manufacturer|default:"—" }}</dd>
+        <dt>{% translate "Factory number" %}</dt><dd>{{ machine.factory_number }}</dd>
+        <dt>{% translate "Last contact" %}</dt><dd>{{ machine.last_contact_at|date:"d.m.Y"|default:"—" }}</dd>
+      </dl>
+    </section>
+  </aside>
+</div>
+{% endblock %}
