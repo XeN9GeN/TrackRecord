@@ -25,6 +25,8 @@ def machine_list(request):
             | Q(current_owner__name__icontains=query)
             | Q(current_owner__region__icontains=query)
         )
+    # Meta.ordering is not applied to aggregate queries.
+    machines = machines.order_by("model__name", "factory_number")
     return render(request, "core/machine_list.html", {"machines": machines, "query": query})
 
 
