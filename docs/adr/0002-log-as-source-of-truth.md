@@ -1,6 +1,6 @@
 # ADR-0002: The log is the only way to change state
 
-**Status:** accepted
+**Status:** accepted; amended by [ADR-0010](0010-log-entry-revisions-table.md) (text revisions)
 
 ## Context
 The core value of the service is a trustworthy machine history. If the current owner or installed

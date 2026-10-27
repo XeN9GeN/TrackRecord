@@ -1,0 +1,13 @@
+Django>=5.2,<6
+psycopg[binary]>=3.2
+django-simple-history>=3.7
+django-axes>=7.0
+markdown-it-py>=3.0
+linkify-it-py>=2.0
+nh3>=0.2
+Pillow>=11.0
+pillow-heif>=0.20
+python-magic>=0.4
+openpyxl>=3.1
+django-environ>=0.12
+gunicorn>=23
