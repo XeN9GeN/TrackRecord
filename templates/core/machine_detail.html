@@ -55,7 +55,9 @@
     <section class="card">
       <div class="row">
         <h2>{% translate "History" %}</h2>
-        {% block new_entry %}{% endblock %}
+        {% if perms.core.add_logentry %}
+          <a class="button primary" href="{% url 'core:log_entry_create' machine.pk %}">{% translate "New entry" %}</a>
+        {% endif %}
       </div>
       {% if kind_filter %}
         <nav class="filters">

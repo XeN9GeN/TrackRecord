@@ -1,11 +1,15 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
+from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db.models import Count, OuterRef, Q, Subquery, Value
 from django.db.models.functions import Concat, Trim
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 
-from .forms import FORM_KINDS
+from .forms import FORM_KINDS, LogEntryForm
 from .models import IssueStatus, LogEntry, LogKind, Machine
+from .services import create_log_entry
 
 
 @login_required
@@ -53,6 +57,25 @@ def machine_detail(request, pk):
         "page": Paginator(entries, 30).get_page(request.GET.get("page")),
         "kind_filter": [(value, label) for value, label in LogKind.choices if value in present_kinds],
         "selected_kind": kind,
-        "form_kinds": FORM_KINDS,
     }
     return render(request, "core/machine_detail.html", context)
+
+
+@login_required
+@permission_required("core.add_logentry", raise_exception=True)
+def log_entry_create(request, machine_pk):
+    machine = get_object_or_404(Machine.objects.select_related("model", "current_owner"), pk=machine_pk)
+    kind = request.GET.get("kind", "")
+    if kind not in FORM_KINDS:
+        return render(request, "core/log_entry_kind.html", {"machine": machine, "form_kinds": FORM_KINDS})
+    kind = LogKind(kind)
+    form = LogEntryForm(request.POST or None, machine=machine, kind=kind)
+    if request.method == "POST" and form.is_valid():
+        try:
+            create_log_entry(author=request.user, machine=machine, kind=kind, **form.cleaned_data)
+        except ValidationError as error:
+            form.add_error(None, error)
+        else:
+            messages.success(request, _("Entry added."))
+            return redirect("core:machine_detail", pk=machine.pk)
+    return render(request, "core/log_entry_form.html", {"machine": machine, "form": form, "kind": kind})

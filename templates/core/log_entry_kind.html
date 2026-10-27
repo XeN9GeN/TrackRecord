@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "New entry" %}{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'core:machine_detail' machine.pk %}">← {{ machine }}</a></p>
+<section class="card">
+  <h1>{% translate "New entry" %}</h1>
+  <p class="muted">{% translate "What happened?" %}</p>
+  <nav class="filters">
+    {% for kind in form_kinds %}
+      <a href="?kind={{ kind.value }}">{{ kind.label }}</a>
+    {% endfor %}
+  </nav>
+</section>
+{% endblock %}
