@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from simple_history.admin import SimpleHistoryAdmin
 
@@ -15,6 +17,15 @@ from .models import (
 
 admin.site.site_header = _("TrackRecord administration")
 admin.site.site_title = "TrackRecord"
+
+admin.site.unregister(User)
+
+
+@admin.register(User)
+class UserAdmin(BaseUserAdmin):
+    """Keep the audit dates visible but not editable in the admin."""
+
+    readonly_fields = ("last_login", "date_joined")
 
 
 class ContactPersonInline(admin.TabularInline):
