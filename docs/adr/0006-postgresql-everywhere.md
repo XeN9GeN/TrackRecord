@@ -11,9 +11,8 @@ the service must later move from the MVP to a corporate server with minimal effo
 ## Decision
 - PostgreSQL 16 is the only database, in development, tests and production.
   Connection is configured with `DATABASE_URL`; there is no SQLite fallback.
-- Development: PostgreSQL installed natively in WSL (`apt`), not in Docker Desktop, to save
-  memory on developer laptops. Production: the `db` service of `docker compose` or a
-  PostgreSQL instance provided by IT.
+- Development and tests use a PostgreSQL 16 instance configured through `DATABASE_URL`.
+  Production uses the `db` service of `docker compose` or a PostgreSQL instance provided by IT.
 - Integrity lives in the database: foreign keys, unique constraints
   (machine model + factory number, equipment type + serial number), check constraints.
 - `django.contrib.postgres` is used for Russian full-text search (`tsvector`, config `russian`)

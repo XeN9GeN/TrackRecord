@@ -1,0 +1,23 @@
+# Host-specific overrides for this machine.
+#
+# TLS is terminated by the already configured host nginx (Let's Encrypt
+# certificate for <ip>.sslip.io). That nginx listens on 80/443, serves
+# /static/ and /protected-media/ from the repository directories and proxies
+# application requests to 127.0.0.1:8000. The Compose nginx service is
+# therefore not used here; it stays available under the "container-edge"
+# profile for hosts that do not have a reverse proxy of their own.
+#
+# Static files and media are bind-mounted from the repository so the host
+# nginx and the web container see the same files. The web container runs as
+# uid 1000 (the "app" user built by the Dockerfile with APP_UID=1000), which
+# matches the owner of this repository on the host.
+services:
+  web:
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./media:/app/media
+      - ./staticfiles:/app/staticfiles
+
+  nginx:
+    profiles: ["container-edge"]

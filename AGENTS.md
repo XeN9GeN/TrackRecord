@@ -6,21 +6,20 @@ and the decisions in [docs/adr/](docs/adr/) before changing architecture.
 
 ## Environment
 
-- Development happens in WSL (Ubuntu), Python 3.12, virtualenv in `.venv/`.
+- Development uses Python 3.12, with the virtualenv in `.venv/`.
 - PostgreSQL 16 is required everywhere, including development and tests (ADR-0006).
-  Locally it runs natively in WSL, not in Docker. Connection comes from `DATABASE_URL`.
-- System packages: `sudo apt install postgresql gettext libmagic1`.
+  The connection comes from `DATABASE_URL`.
+- Install PostgreSQL, gettext and libmagic1 with the operating system's package manager.
 - All environment-specific settings come from environment variables (see `.env.example`).
 
 ## Commands
 
 ```bash
-# one-time setup
-sudo service postgresql start
-sudo -u postgres createuser --createdb trackrecord -P
-sudo -u postgres createdb -O trackrecord trackrecord
+# one-time setup: install Python 3.12, PostgreSQL 16, gettext and libmagic1
+# with the operating system's package manager, then create a PostgreSQL user
+# and database and set DATABASE_URL in .env.
 python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
-cp .env.example .env            # set DATABASE_URL=postgres://trackrecord:<password>@localhost:5432/trackrecord
+cp .env.example .env
 
 # daily
 .venv/bin/python manage.py migrate

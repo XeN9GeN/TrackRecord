@@ -1,0 +1,12 @@
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.env
+media
+staticfiles
+*.mo
+README.md
+docs
+core/tests
