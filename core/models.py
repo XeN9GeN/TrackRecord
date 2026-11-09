@@ -12,8 +12,21 @@ from django.db.models import F, Q
 from django.db.models.functions import Length
 from django.db.models.lookups import LessThanOrEqual
 from django.utils import timezone
+from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
+
+
+def historical_records(verbose_name, verbose_name_plural):
+    """Build HistoricalRecords with a translatable label.
+
+    simple-history hardcodes the English "historical " prefix, which mixes
+    languages in the admin. Pass an explicit name so the prefix is translated.
+    """
+    return HistoricalRecords(
+        verbose_name=format_lazy(_("historical {}"), verbose_name),
+        verbose_name_plural=format_lazy(_("historical {}"), verbose_name_plural),
+    )
 
 
 class MachineStatus(models.TextChoices):
@@ -76,7 +89,7 @@ class Counterparty(models.Model):
     notes = models.TextField(_("notes"), blank=True)
     is_active = models.BooleanField(_("active"), default=True)
 
-    history = HistoricalRecords()
+    history = historical_records(_("counterparty"), _("counterparties"))
 
     class Meta:
         verbose_name = _("counterparty")
@@ -98,7 +111,7 @@ class ContactPerson(models.Model):
     notes = models.TextField(_("notes"), blank=True)
     is_active = models.BooleanField(_("active"), default=True)
 
-    history = HistoricalRecords()
+    history = historical_records(_("contact person"), _("contact persons"))
 
     class Meta:
         verbose_name = _("contact person")
@@ -115,7 +128,7 @@ class MachineModel(models.Model):
     name = models.CharField(_("name"), max_length=255, unique=True)
     manufacturer = models.CharField(_("manufacturer"), max_length=255, blank=True)
 
-    history = HistoricalRecords()
+    history = historical_records(_("machine model"), _("machine models"))
 
     class Meta:
         verbose_name = _("machine model")
@@ -143,7 +156,7 @@ class Machine(models.Model):
     last_contact_at = models.DateTimeField(_("last contact"), null=True, blank=True)
     created_at = models.DateTimeField(_("created"), default=timezone.now)
 
-    history = HistoricalRecords()
+    history = historical_records(_("machine"), _("machines"))
 
     class Meta:
         verbose_name = _("machine")
@@ -161,7 +174,7 @@ class Machine(models.Model):
 class EquipmentType(models.Model):
     name = models.CharField(_("name"), max_length=255, unique=True)
 
-    history = HistoricalRecords()
+    history = historical_records(_("equipment type"), _("equipment types"))
 
     class Meta:
         verbose_name = _("equipment type")
@@ -189,7 +202,7 @@ class Equipment(models.Model):
         verbose_name=_("installed on"),
     )
 
-    history = HistoricalRecords()
+    history = historical_records(_("equipment"), _("equipment"))
 
     class Meta:
         verbose_name = _("equipment")

@@ -4,12 +4,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TrackRecord\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-28 01:19+0700\n"
+"POT-Creation-Date: 2026-11-10 00:15+0700\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: core/admin.py:16
 msgid "TrackRecord administration"
@@ -107,7 +109,7 @@ msgstr "Версия ПО"
 
 #: core/forms.py:69
 msgid "Leave empty to keep the version recorded for this unit."
-msgstr "Оставьте пустым, чтобы сохранить версию, записанную для этого блока."
+msgstr "Оставьте пустым, чтобы сохранить текущую версию этого оборудования."
 
 #: core/forms.py:75
 msgid "New software version"
@@ -125,403 +127,427 @@ msgstr "Новый статус"
 msgid "Resolved issues"
 msgstr "Устранённые замечания"
 
-#: core/models.py:20
+#: core/management/commands/localize_permissions.py:19
+#, python-format
+msgid "Can add %(model)s"
+msgstr "Может добавлять: %(model)s"
+
+#: core/management/commands/localize_permissions.py:20
+#, python-format
+msgid "Can change %(model)s"
+msgstr "Может изменять: %(model)s"
+
+#: core/management/commands/localize_permissions.py:21
+#, python-format
+msgid "Can delete %(model)s"
+msgstr "Может удалять: %(model)s"
+
+#: core/management/commands/localize_permissions.py:22
+#, python-format
+msgid "Can view %(model)s"
+msgstr "Может просматривать: %(model)s"
+
+#: core/models.py:27 core/models.py:28
+msgid "historical {}"
+msgstr "история — {}"
+
+#: core/models.py:33
 msgid "in service"
 msgstr "в работе"
 
-#: core/models.py:21
+#: core/models.py:34
 msgid "under repair"
 msgstr "в ремонте"
 
-#: core/models.py:22
+#: core/models.py:35
 msgid "sold"
 msgstr "продана"
 
-#: core/models.py:23
+#: core/models.py:36
 msgid "decommissioned"
 msgstr "списана"
 
-#: core/models.py:24
+#: core/models.py:37
 msgid "unknown"
 msgstr "неизвестно"
 
-#: core/models.py:28
+#: core/models.py:41
 msgid "in stock"
 msgstr "на складе"
 
-#: core/models.py:29
+#: core/models.py:42
 msgid "installed"
 msgstr "установлено"
 
-#: core/models.py:30
+#: core/models.py:43
 msgid "removed"
 msgstr "снято"
 
-#: core/models.py:31
+#: core/models.py:44
 msgid "written off"
 msgstr "списано"
 
-#: core/models.py:35
+#: core/models.py:48
 msgid "Request / call / info"
 msgstr "Обращение / звонок / информация"
 
-#: core/models.py:36
+#: core/models.py:49
 msgid "Issue"
 msgstr "Замечание"
 
-#: core/models.py:37
+#: core/models.py:50
 msgid "Maintenance / repair / remote consultation"
 msgstr "ТО / ремонт / удалённая консультация"
 
-#: core/models.py:38
+#: core/models.py:51
 msgid "Equipment installation"
 msgstr "Установка оборудования"
 
-#: core/models.py:39
+#: core/models.py:52
 msgid "Equipment removal"
 msgstr "Снятие оборудования"
 
-#: core/models.py:40
+#: core/models.py:53
 msgid "Equipment write-off"
 msgstr "Списание оборудования"
 
-#: core/models.py:41
+#: core/models.py:54
 msgid "Software update"
 msgstr "Обновление ПО"
 
-#: core/models.py:42
+#: core/models.py:55
 msgid "Ownership change"
 msgstr "Смена владельца"
 
-#: core/models.py:43
+#: core/models.py:56
 msgid "Machine status change"
 msgstr "Смена статуса машины"
 
-#: core/models.py:44
+#: core/models.py:57
 msgid "Document"
 msgstr "Документ"
 
-#: core/models.py:45
+#: core/models.py:58
 msgid "Initial data import"
 msgstr "Начальный импорт данных"
 
-#: core/models.py:49
+#: core/models.py:62
 msgid "phone call"
 msgstr "звонок"
 
-#: core/models.py:50 core/models.py:97
+#: core/models.py:63 core/models.py:110
 msgid "email"
 msgstr "эл. почта"
 
-#: core/models.py:51
+#: core/models.py:64
 msgid "messenger"
 msgstr "мессенджер"
 
-#: core/models.py:52
+#: core/models.py:65
 msgid "site visit"
 msgstr "выезд на объект"
 
-#: core/models.py:53
+#: core/models.py:66
 msgid "remote"
 msgstr "удалённо"
 
-#: core/models.py:54
+#: core/models.py:67
 msgid "other"
 msgstr "другое"
 
-#: core/models.py:58
+#: core/models.py:71
 msgid "open"
 msgstr "открыто"
 
-#: core/models.py:59
+#: core/models.py:72
 msgid "resolved"
 msgstr "устранено"
 
-#: core/models.py:73 core/models.py:115 core/models.py:162
+#: core/models.py:86 core/models.py:128 core/models.py:175
 msgid "name"
 msgstr "название"
 
-#: core/models.py:74
+#: core/models.py:87
 msgid "taxpayer id (INN)"
 msgstr "ИНН"
 
-#: core/models.py:75
+#: core/models.py:88
 msgid "region"
 msgstr "регион"
 
-#: core/models.py:76 core/models.py:98
+#: core/models.py:89 core/models.py:111
 msgid "notes"
 msgstr "примечания"
 
-#: core/models.py:77 core/models.py:99
+#: core/models.py:90 core/models.py:112
 msgid "active"
 msgstr "активен"
 
-#: core/models.py:82 core/models.py:92
+#: core/models.py:92 core/models.py:95 core/models.py:105
 msgid "counterparty"
 msgstr "контрагент"
 
-#: core/models.py:83
+#: core/models.py:92 core/models.py:96
 msgid "counterparties"
 msgstr "контрагенты"
 
-#: core/models.py:94
+#: core/models.py:107
 msgid "full name"
 msgstr "ФИО"
 
-#: core/models.py:95
+#: core/models.py:108
 msgid "position"
 msgstr "должность"
 
-#: core/models.py:96
+#: core/models.py:109
 msgid "phones"
 msgstr "телефоны"
 
-#: core/models.py:104 core/models.py:247
+#: core/models.py:114 core/models.py:117 core/models.py:260
 msgid "contact person"
 msgstr "контактное лицо"
 
-#: core/models.py:105
+#: core/models.py:114 core/models.py:118
 msgid "contact persons"
 msgstr "контактные лица"
 
-#: core/models.py:116
+#: core/models.py:129
 msgid "manufacturer"
 msgstr "производитель"
 
-#: core/models.py:121
+#: core/models.py:131 core/models.py:134
 msgid "machine model"
 msgstr "модель машины"
 
-#: core/models.py:122
+#: core/models.py:131 core/models.py:135
 msgid "machine models"
 msgstr "модели машин"
 
-#: core/models.py:132
+#: core/models.py:145
 msgid "model"
 msgstr "модель"
 
-#: core/models.py:133
+#: core/models.py:146
 msgid "factory number"
 msgstr "заводской номер"
 
-#: core/models.py:140
+#: core/models.py:153
 msgid "current owner"
 msgstr "текущий владелец"
 
-#: core/models.py:142
+#: core/models.py:155
 msgid "status"
 msgstr "статус"
 
-#: core/models.py:143
+#: core/models.py:156
 msgid "last contact"
 msgstr "последний контакт"
 
-#: core/models.py:144
+#: core/models.py:157
 msgid "created"
-msgstr "создана"
+msgstr "дата создания"
 
-#: core/models.py:149 core/models.py:232
+#: core/models.py:159 core/models.py:162 core/models.py:245
 msgid "machine"
 msgstr "машина"
 
-#: core/models.py:150
+#: core/models.py:159 core/models.py:163
 msgid "machines"
 msgstr "машины"
 
-#: core/models.py:167
+#: core/models.py:177 core/models.py:180
 msgid "equipment type"
 msgstr "тип оборудования"
 
-#: core/models.py:168
+#: core/models.py:177 core/models.py:181
 msgid "equipment types"
 msgstr "типы оборудования"
 
-#: core/models.py:178
+#: core/models.py:191
 msgid "type"
 msgstr "тип"
 
-#: core/models.py:179
+#: core/models.py:192
 msgid "serial number"
 msgstr "серийный номер"
 
-#: core/models.py:180
+#: core/models.py:193
 msgid "production year"
 msgstr "год выпуска"
 
-#: core/models.py:181 core/models.py:267
+#: core/models.py:194 core/models.py:280
 msgid "software version"
 msgstr "версия ПО"
 
-#: core/models.py:182
+#: core/models.py:195
 msgid "state"
 msgstr "состояние"
 
-#: core/models.py:189
+#: core/models.py:202
 msgid "installed on"
 msgstr "установлено на"
 
-#: core/models.py:195 core/models.py:196 core/models.py:265
+#: core/models.py:205 core/models.py:208 core/models.py:209 core/models.py:278
 msgid "equipment"
 msgstr "оборудование"
 
-#: core/models.py:235
+#: core/models.py:248
 msgid "author"
 msgstr "автор"
 
-#: core/models.py:237
+#: core/models.py:250
 msgid "recorded at"
-msgstr "записано"
+msgstr "время записи"
 
-#: core/models.py:238
+#: core/models.py:251
 msgid "event date"
 msgstr "дата события"
 
-#: core/models.py:239
+#: core/models.py:252
 msgid "kind"
 msgstr "вид"
 
-#: core/models.py:240
+#: core/models.py:253
 msgid "source"
 msgstr "источник"
 
-#: core/models.py:255
+#: core/models.py:268
 msgid "owner at the time"
 msgstr "владелец на момент записи"
 
-#: core/models.py:257 core/models.py:376
+#: core/models.py:270 core/models.py:389
 msgid "title"
 msgstr "заголовок"
 
-#: core/models.py:258 core/models.py:377
+#: core/models.py:271 core/models.py:390
 msgid "text"
 msgstr "текст"
 
-#: core/models.py:258
+#: core/models.py:271
 msgid "Markdown is supported."
 msgstr "Поддерживается Markdown."
 
-#: core/models.py:274
+#: core/models.py:287
 msgid "new owner"
 msgstr "новый владелец"
 
-#: core/models.py:276
+#: core/models.py:289
 msgid "new status"
 msgstr "новый статус"
 
-#: core/models.py:277
+#: core/models.py:290
 msgid "issue"
 msgstr "замечание"
 
-#: core/models.py:278
+#: core/models.py:291
 msgid "issue status"
 msgstr "статус замечания"
 
-#: core/models.py:285
+#: core/models.py:298
 msgid "resolved by"
 msgstr "устранено записью"
 
-#: core/models.py:287
+#: core/models.py:300
 msgid "resolved at"
 msgstr "устранено"
 
-#: core/models.py:288
+#: core/models.py:301
 msgid "extra attributes"
 msgstr "дополнительные атрибуты"
 
-#: core/models.py:295 core/models.py:381
+#: core/models.py:308 core/models.py:394
 msgid "edited at"
 msgstr "изменено"
 
-#: core/models.py:298 core/models.py:374
+#: core/models.py:311 core/models.py:387
 msgid "log entry"
 msgstr "запись лога"
 
-#: core/models.py:299
+#: core/models.py:312
 msgid "log entries"
 msgstr "записи лога"
 
-#: core/models.py:379
+#: core/models.py:392
 msgid "edited by"
-msgstr "кто изменил"
+msgstr "изменил"
 
-#: core/models.py:384
+#: core/models.py:397
 msgid "log entry revision"
 msgstr "версия записи"
 
-#: core/models.py:385
+#: core/models.py:398
 msgid "log entry revisions"
 msgstr "версии записей"
 
-#: core/services.py:62
+#: core/services.py:63
 msgid "Event date cannot be in the future."
 msgstr "Дата события не может быть в будущем."
 
-#: core/services.py:75
+#: core/services.py:76
 msgid "Machine is required."
 msgstr "Укажите машину."
 
-#: core/services.py:79
+#: core/services.py:80
 msgid "Equipment is required."
 msgstr "Укажите оборудование."
 
-#: core/services.py:111
+#: core/services.py:114
 #, python-format
 msgid "“%(title)s” is not an open issue of this machine."
 msgstr "«%(title)s» — не открытое замечание этой машины."
 
-#: core/services.py:116
+#: core/services.py:119
 #, python-format
 msgid "%(equipment)s cannot be installed: it is %(state)s."
 msgstr "%(equipment)s нельзя установить: состояние «%(state)s»."
 
-#: core/services.py:129
+#: core/services.py:132
 #, python-format
 msgid "%(equipment)s is already written off."
 msgstr "%(equipment)s уже списано."
 
-#: core/services.py:138
+#: core/services.py:141
 msgid "Software version is required."
 msgstr "Укажите версию ПО."
 
-#: core/services.py:140
+#: core/services.py:143
 msgid "This software version is already installed."
 msgstr "Эта версия ПО уже установлена."
 
-#: core/services.py:145
+#: core/services.py:148
 msgid "New owner is required."
 msgstr "Укажите нового владельца."
 
-#: core/services.py:147
+#: core/services.py:150
 msgid "This counterparty already owns the machine."
 msgstr "Машина уже принадлежит этому контрагенту."
 
-#: core/services.py:153
+#: core/services.py:156
 msgid "New status is required."
 msgstr "Укажите новый статус."
 
-#: core/services.py:155
+#: core/services.py:158
 msgid "The machine already has this status."
 msgstr "У машины уже этот статус."
 
-#: core/services.py:206
+#: core/services.py:209
 msgid "Title is required."
 msgstr "Укажите заголовок."
 
-#: core/services.py:213
+#: core/services.py:216
 msgid "Text is too long."
 msgstr "Слишком длинный текст."
 
-#: core/services.py:219
+#: core/services.py:229
 #, python-format
 msgid "%(equipment)s is not installed on this machine."
 msgstr "%(equipment)s не установлено на этой машине."
 
-#: core/views.py:79
+#: core/views.py:81
 msgid "Entry added."
 msgstr "Запись добавлена."
 
-#: core/views.py:111
+#: core/views.py:113
 msgid "Entry updated, the previous version is kept."
 msgstr "Запись изменена, предыдущая версия сохранена."
 
@@ -562,8 +588,8 @@ msgid ""
 "Only the title and text can be changed. The previous version will be kept; "
 "to correct facts, add a new entry."
 msgstr ""
-"Можно изменить только заголовок и текст. Предыдущая версия сохранится; чтобы"
-" исправить факты, добавьте новую запись."
+"Можно изменить только заголовок и текст. Предыдущая версия сохранится; чтобы "
+"исправить факты, добавьте новую запись."
 
 #: templates/core/log_entry_amend.html:11
 msgid "Save"
@@ -653,11 +679,11 @@ msgstr "Записей пока нет."
 
 #: templates/core/machine_detail.html:79
 msgid "Newer"
-msgstr "Новее"
+msgstr "Новые"
 
 #: templates/core/machine_detail.html:81
 msgid "Older"
-msgstr "Старше"
+msgstr "Старые"
 
 #: templates/core/machine_detail.html:89 templates/core/machine_list.html:24
 msgid "Owner"
