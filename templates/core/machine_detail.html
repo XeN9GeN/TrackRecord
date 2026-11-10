@@ -39,7 +39,7 @@
             {% for unit in installed %}
               <tr>
                 <td>{{ unit.type }}</td>
-                <td>{{ unit.serial_number }}</td>
+                <td><a href="{% url 'core:equipment_detail' unit.pk %}">{{ unit.serial_number }}</a></td>
                 <td>{{ unit.production_year|default:"—" }}</td>
                 <td>{{ unit.software_version|default:"—" }}</td>
                 <td>{{ unit.installed_on|date:"d.m.Y"|default:"—" }}{% if unit.installed_by %}, {{ unit.installed_by }}{% endif %}</td>

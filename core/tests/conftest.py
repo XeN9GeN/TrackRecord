@@ -1,12 +1,20 @@
 import pytest
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 
 from core.models import Counterparty, Equipment, EquipmentType, Machine, MachineModel
+from core.roles import ENGINEER
 
 
 @pytest.fixture
 def engineer(db):
     return User.objects.create_user("engineer", password="secret-pass-1")
+
+
+@pytest.fixture
+def client_logged_in(client, engineer):
+    engineer.groups.add(Group.objects.get(name=ENGINEER))
+    client.force_login(engineer)
+    return client
 
 
 @pytest.fixture

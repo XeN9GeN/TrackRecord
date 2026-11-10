@@ -1,0 +1,70 @@
+{% load i18n %}
+<form method="get" class="list-filters" role="search">
+  <div class="card filter-panel">
+    {{ filter_form.non_field_errors }}
+    <div class="filter-search">
+      <label class="visually-hidden" for="{{ filter_form.q.id_for_label }}">{{ filter_form.q.label }}</label>
+      <div class="filter-search-input">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        {{ filter_form.q }}
+      </div>
+      {{ filter_form.q.errors }}
+      <p class="muted filter-help" id="{{ filter_form.q.id_for_label }}_helptext">{{ filter_form.q.help_text }}</p>
+    </div>
+
+    <div class="filter-grid filter-primary">
+      {% for field in filter_form.primary_filters %}
+        {% include "core/_filter_field.html" %}
+      {% endfor %}
+    </div>
+
+    {% if filter_form.additional_filter_groups %}
+    <details class="filter-options"{% if additional_filter_count or filter_form.errors %} open{% endif %}>
+      <summary>
+        <svg class="filter-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 7h7m4 0h5M4 17h3m4 0h9"/><circle cx="13" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>
+        {% translate "More filters" %}
+        {% if additional_filter_count %}<span class="filter-count">{{ additional_filter_count }}</span>{% endif %}
+        <svg class="filter-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+      </summary>
+      <div class="filter-additional">
+        {% for group in filter_form.additional_filters %}
+          <fieldset class="filter-group">
+            <legend>{{ group.label }}</legend>
+            <div class="filter-grid">
+              {% for field in group.fields %}
+                {% include "core/_filter_field.html" %}
+              {% endfor %}
+            </div>
+          </fieldset>
+        {% endfor %}
+      </div>
+    </details>
+    {% endif %}
+
+    {% if active_filters or filter_form.errors %}
+      <div class="filter-applied">
+        {% if active_filters %}
+          <ul class="filter-chips" aria-label="{% translate 'Applied filters' %}">
+            {% for filter in active_filters %}
+              <li><a class="filter-chip" href="{{ filter.url }}" aria-label="{% blocktranslate with label=filter.label value=filter.value %}Remove filter: {{ label }}: {{ value }}{% endblocktranslate %}"><span>{{ filter.label }}: <strong>{{ filter.value }}</strong></span><span aria-hidden="true">×</span></a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <a class="filter-reset" href="{{ reset_url }}">{% translate "Reset filters" %}</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="list-toolbar">
+    <div class="list-result" role="status">
+      <strong>{% blocktranslate with count=page.paginator.count %}Found: {{ count }}{% endblocktranslate %}</strong>
+      {% if page.paginator.count %}<span class="muted">{% blocktranslate with start=page.start_index end=page.end_index %}Showing {{ start }}–{{ end }}{% endblocktranslate %}</span>{% endif %}
+    </div>
+    <div class="list-sort">
+      <div class="filter-sort-field">{% include "core/_filter_field.html" with field=filter_form.sort %}</div>
+      <div class="filter-direction-field">{% include "core/_filter_field.html" with field=filter_form.direction %}</div>
+      <div class="filter-page-field">{% include "core/_filter_field.html" with field=filter_form.per_page %}</div>
+      <button type="submit" class="button primary filter-submit">{% translate "Apply" %}</button>
+    </div>
+  </div>
+</form>

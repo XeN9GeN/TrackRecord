@@ -4,19 +4,18 @@
 {% block title %}{% translate "Machines" %}{% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row list-heading">
   <h1>{% translate "Machines" %}</h1>
   {% if perms.core.add_machine %}
     <a class="button" href="{% url 'admin:core_machine_add' %}">{% translate "Add machine" %}</a>
   {% endif %}
 </div>
 
-<form method="get" class="search">
-  <input type="search" name="q" value="{{ query }}" placeholder="{% translate 'Number, model, owner or region' %}">
-  <button type="submit" class="button">{% translate "Find" %}</button>
-</form>
+{% url 'core:home' as reset_url %}
+{% include "core/_list_filters.html" %}
 
 <section class="card">
   {% include "core/_machine_table.html" with show_owner=True %}
 </section>
+{% include "core/_list_pagination.html" %}
 {% endblock %}

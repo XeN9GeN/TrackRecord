@@ -4,17 +4,15 @@
 {% block title %}{% translate "Counterparties" %}{% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row list-heading">
   <h1>{% translate "Counterparties" %}</h1>
   {% if perms.core.add_counterparty %}
     <a class="button" href="{% url 'admin:core_counterparty_add' %}">{% translate "Add counterparty" %}</a>
   {% endif %}
 </div>
 
-<form method="get" class="search" role="search">
-  <input type="search" name="q" value="{{ query }}" aria-label="{% translate 'Name, INN or region' %}" placeholder="{% translate 'Name, INN or region' %}">
-  <button type="submit" class="button">{% translate "Find" %}</button>
-</form>
+{% url 'core:counterparty_list' as reset_url %}
+{% include "core/_list_filters.html" %}
 
 <section class="card table-scroll">
   <table>
@@ -24,6 +22,8 @@
         <th>{% translate "INN" %}</th>
         <th>{% translate "Region" %}</th>
         <th>{% translate "Machines" %}</th>
+        <th>{% translate "Active contacts" %}</th>
+        <th>{% translate "Last contact" %}</th>
         <th>{% translate "Status" %}</th>
       </tr>
     </thead>
@@ -34,12 +34,15 @@
           <td>{{ counterparty.inn|default:"—" }}</td>
           <td>{{ counterparty.region|default:"—" }}</td>
           <td>{{ counterparty.machine_count }}</td>
+          <td>{{ counterparty.active_contact_count }}</td>
+          <td>{{ counterparty.last_contact_at|date:"d.m.Y"|default:"—" }}</td>
           <td>{% if counterparty.is_active %}{% translate "Active" %}{% else %}<span class="muted">{% translate "Inactive" %}</span>{% endif %}</td>
         </tr>
       {% empty %}
-        <tr><td colspan="5" class="muted">{% translate "No counterparties found." %}</td></tr>
+        <tr><td colspan="7" class="muted">{% translate "No counterparties found." %}</td></tr>
       {% endfor %}
     </tbody>
   </table>
 </section>
+{% include "core/_list_pagination.html" %}
 {% endblock %}

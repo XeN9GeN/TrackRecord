@@ -8,12 +8,13 @@
   <div class="entry-meta">
     {{ entry.event_date|date:"d.m.Y" }} · {{ entry.author.get_full_name|default:entry.author.username }}
     · {{ entry.get_source_display }}
+    {% if show_machine and entry.machine %} · <a href="{% url 'core:machine_detail' entry.machine.pk %}">{{ entry.machine }}</a>{% endif %}
     {% if entry.contact %} · {% translate "reported by" %} {{ entry.contact.full_name }}{% endif %}
     {% if entry.edited_at %} · <span title="{{ entry.edited_at|date:'d.m.Y H:i' }}">{% translate "edited" %}</span>{% endif %}
   </div>
   {% if entry.equipment or entry.new_owner or entry.new_status or entry.resolved_issues.all %}
     <div class="entry-effect">
-      {% if entry.equipment %}{{ entry.equipment }}{% if entry.software_version %}, {% translate "software" %} {{ entry.software_version }}{% endif %}{% endif %}
+      {% if entry.equipment %}<a href="{% url 'core:equipment_detail' entry.equipment.pk %}">{{ entry.equipment }}</a>{% if entry.software_version %}, {% translate "software" %} {{ entry.software_version }}{% endif %}{% endif %}
       {% if entry.new_owner %}{% translate "New owner" %}: {{ entry.new_owner }}{% endif %}
       {% if entry.new_status %}{% translate "New status" %}: {{ entry.get_new_status_display }}{% endif %}
       {% for issue in entry.resolved_issues.all %}

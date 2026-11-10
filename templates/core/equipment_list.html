@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Equipment" %}{% endblock %}
+
+{% block content %}
+<div class="row list-heading">
+  <h1>{% translate "Equipment" %}</h1>
+  {% if perms.core.add_equipment %}
+    <a class="button" href="{% url 'admin:core_equipment_add' %}">{% translate "Add equipment" %}</a>
+  {% endif %}
+</div>
+
+{% url 'core:equipment_list' as reset_url %}
+{% include "core/_list_filters.html" %}
+
+<section class="card table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>{% translate "Type" %}</th>
+        <th>{% translate "Serial number" %}</th>
+        <th>{% translate "Year" %}</th>
+        <th>{% translate "Software" %}</th>
+        <th>{% translate "Equipment state" %}</th>
+        <th>{% translate "Machine" %}</th>
+        <th>{% translate "Owner" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for unit in equipment %}
+        <tr>
+          <td>{{ unit.type }}</td>
+          <td><a href="{% url 'core:equipment_detail' unit.pk %}">{{ unit.serial_number }}</a></td>
+          <td>{{ unit.production_year|default:"—" }}</td>
+          <td>{{ unit.software_version|default:"—" }}</td>
+          <td><span class="badge {{ unit.state }}">{{ unit.get_state_display }}</span></td>
+          <td>{% if unit.current_machine %}<a href="{% url 'core:machine_detail' unit.current_machine.pk %}">{{ unit.current_machine }}</a>{% else %}—{% endif %}</td>
+          <td>{% if unit.current_machine.current_owner %}<a href="{% url 'core:counterparty_detail' unit.current_machine.current_owner.pk %}">{{ unit.current_machine.current_owner }}</a>{% else %}—{% endif %}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="7" class="muted">{% translate "No equipment found." %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% include "core/_list_pagination.html" %}
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ equipment }}{% endblock %}
+
+{% block content %}
+<p class="breadcrumb"><a href="{% url 'core:equipment_list' %}">← {% translate "Equipment" %}</a></p>
+<div class="row">
+  <h1>{{ equipment }}</h1>
+  <span class="badge {{ equipment.state }}">{{ equipment.get_state_display }}</span>
+</div>
+
+<div class="grid">
+  <section class="card">
+    <div class="row">
+      <h2>{% translate "Equipment details" %}</h2>
+      {% if perms.core.change_equipment %}
+        <a class="button" href="{% url 'admin:core_equipment_change' equipment.pk %}">{% translate "Edit equipment" %}</a>
+      {% endif %}
+    </div>
+    <dl class="facts">
+      <dt>{% translate "Type" %}</dt><dd>{{ equipment.type }}</dd>
+      <dt>{% translate "Serial number" %}</dt><dd>{{ equipment.serial_number }}</dd>
+      <dt>{% translate "Year" %}</dt><dd>{{ equipment.production_year|default:"—" }}</dd>
+      <dt>{% translate "Software" %}</dt><dd>{{ equipment.software_version|default:"—" }}</dd>
+    </dl>
+  </section>
+  <aside>
+    <section class="card">
+      <h2>{% translate "Location" %}</h2>
+      {% if equipment.current_machine %}
+        <dl class="facts">
+          <dt>{% translate "Machine" %}</dt><dd><a href="{% url 'core:machine_detail' equipment.current_machine.pk %}">{{ equipment.current_machine }}</a></dd>
+          <dt>{% translate "Owner" %}</dt><dd>{% if equipment.current_machine.current_owner %}<a href="{% url 'core:counterparty_detail' equipment.current_machine.current_owner.pk %}">{{ equipment.current_machine.current_owner }}</a>{% else %}—{% endif %}</dd>
+          <dt>{% translate "Region" %}</dt><dd>{{ equipment.current_machine.current_owner.region|default:"—" }}</dd>
+        </dl>
+      {% else %}
+        <p class="muted">{% translate "Not installed on a machine." %}</p>
+      {% endif %}
+    </section>
+  </aside>
+</div>
+
+<section class="card">
+  <h2>{% translate "History" %}</h2>
+  {% if kind_filter %}
+    <nav class="filters">
+      <a href="?" class="{% if not selected_kind %}active{% endif %}">{% translate "All" %}</a>
+      {% for value, label in kind_filter %}
+        <a href="?kind={{ value }}" class="{% if value == selected_kind %}active{% endif %}">{{ label }}</a>
+      {% endfor %}
+    </nav>
+  {% endif %}
+  <ul class="feed">
+    {% for entry in page %}
+      {% include "core/_entry.html" with show_machine=True %}
+    {% empty %}
+      <li class="muted">{% translate "No entries yet." %}</li>
+    {% endfor %}
+  </ul>
+  {% if page.has_other_pages %}
+    <nav class="filters">
+      {% if page.has_previous %}<a href="?kind={{ selected_kind }}&amp;page={{ page.previous_page_number }}">← {% translate "Newer" %}</a>{% endif %}
+      <span class="muted">{{ page.number }} / {{ page.paginator.num_pages }}</span>
+      {% if page.has_next %}<a href="?kind={{ selected_kind }}&amp;page={{ page.next_page_number }}">{% translate "Older" %} →</a>{% endif %}
+    </nav>
+  {% endif %}
+</section>
+{% endblock %}

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TrackRecord\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-11 00:19+0700\n"
+"POT-Creation-Date: 2026-11-11 01:16+0700\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,7 @@ msgstr "Администрирование TrackRecord"
 msgid "Service books"
 msgstr "Сервисные книжки"
 
-#: core/forms.py:22
+#: core/forms.py:25
 msgid ""
 "**Question:** \n"
 "\n"
@@ -31,7 +31,7 @@ msgstr ""
 "\n"
 "**Ответ / договорились:** "
 
-#: core/forms.py:23
+#: core/forms.py:26
 msgid ""
 "**Symptoms:** \n"
 "\n"
@@ -45,7 +45,7 @@ msgstr ""
 "\n"
 "**Что проверили:** "
 
-#: core/forms.py:24
+#: core/forms.py:27
 msgid ""
 "**What was done:** \n"
 "\n"
@@ -55,7 +55,7 @@ msgstr ""
 "\n"
 "**Результат:** "
 
-#: core/forms.py:25
+#: core/forms.py:28
 msgid ""
 "**Where it is mounted:** \n"
 "\n"
@@ -65,7 +65,7 @@ msgstr ""
 "\n"
 "**Подключение:** "
 
-#: core/forms.py:26
+#: core/forms.py:29
 msgid ""
 "**Reason:** \n"
 "\n"
@@ -75,55 +75,306 @@ msgstr ""
 "\n"
 "**Куда передано оборудование:** "
 
-#: core/forms.py:34
-msgid "Event date"
-msgstr "Дата события"
+#: core/forms.py:39
+msgid "Search"
+msgstr "Поиск"
 
-#: core/forms.py:36
-msgid "Source"
-msgstr "Источник"
-
-#: core/forms.py:37
-msgid "Who reported it"
-msgstr "Кто сообщил"
-
-#: core/forms.py:38 core/forms.py:98
-msgid "Title"
-msgstr "Заголовок"
-
-#: core/forms.py:40 core/forms.py:99
-msgid "Description"
-msgstr "Описание"
+#: core/forms.py:41
+msgid "Use several words to narrow the search; all words must match."
+msgstr "Введите несколько слов для уточнения поиска: учитываются все слова."
 
 #: core/forms.py:44
-msgid "Plain text or Markdown: **bold**, lists with “-”, links."
-msgstr "Обычный текст или Markdown: **жирный**, списки через «-», ссылки."
+msgid "Direction"
+msgstr "Порядок сортировки"
 
-#: core/forms.py:60 core/forms.py:72 core/forms.py:74
-msgid "Equipment"
-msgstr "Оборудование"
+#: core/forms.py:45
+msgid "Ascending"
+msgstr "По возрастанию"
 
-#: core/forms.py:66
+#: core/forms.py:45
+msgid "Descending"
+msgstr "По убыванию"
+
+#: core/forms.py:48
+msgid "Rows per page"
+msgstr "Строк на странице"
+
+#: core/forms.py:78 core/forms.py:137 core/forms.py:177
+#: templates/core/_machine_table.html:9
+#: templates/core/counterparty_detail.html:19
+#: templates/core/counterparty_list.html:23
+#: templates/core/equipment_detail.html:35
+#: templates/core/machine_detail.html:93
+msgid "Region"
+msgstr "Регион"
+
+#: core/forms.py:80 core/forms.py:112 core/forms.py:138 core/forms.py:159
+#: core/forms.py:178 templates/core/_machine_table.html:13
+#: templates/core/counterparty_list.html:26
+#: templates/core/machine_detail.html:118
+msgid "Last contact"
+msgstr "Последний контакт"
+
+#: core/forms.py:81
+msgid "Any date"
+msgstr "Любая дата"
+
+#: core/forms.py:81
+msgid "Never contacted"
+msgstr "Контактов ещё не было"
+
+#: core/forms.py:81 core/tests/test_list_filters.py:224
+msgid "No contact in 90 days"
+msgstr "Не связывались 90 дней и более"
+
+#: core/forms.py:84
+msgid "Last contact from"
+msgstr "Последний контакт — с"
+
+#: core/forms.py:88
+msgid "Last contact through"
+msgstr "Последний контакт — по"
+
+#: core/forms.py:95
+msgid "All regions"
+msgstr "Все регионы"
+
+#: core/forms.py:103
+msgid "Last contact start date must not be after the end date."
+msgstr "Начальная дата последнего контакта не может быть позже конечной."
+
+#: core/forms.py:111
+msgid "Condition and equipment"
+msgstr "Замечания и оборудование"
+
+#: core/forms.py:116 core/forms.py:163 templates/core/_machine_table.html:11
+#: templates/core/counterparty_detail.html:20
+#: templates/core/counterparty_list.html:27
+msgid "Status"
+msgstr "Статус"
+
+#: core/forms.py:116 core/forms.py:164
+msgid "All statuses"
+msgstr "Все статусы"
+
+#: core/forms.py:119 templates/core/machine_detail.html:115
+msgid "Model"
+msgstr "Модель"
+
+#: core/forms.py:119
+msgid "All models"
+msgstr "Все модели"
+
+#: core/forms.py:121 core/forms.py:137 core/forms.py:205 core/forms.py:212
+#: templates/core/_machine_table.html:8 templates/core/equipment_detail.html:34
+#: templates/core/equipment_list.html:27 templates/core/machine_detail.html:89
+msgid "Owner"
+msgstr "Владелец"
+
+#: core/forms.py:123 core/forms.py:138 templates/core/_machine_table.html:12
+#: templates/core/machine_detail.html:16
+msgid "Open issues"
+msgstr "Открытые замечания"
+
+#: core/forms.py:124 core/forms.py:128 core/forms.py:202
+msgid "All machines"
+msgstr "Все машины"
+
+#: core/forms.py:124
+msgid "With open issues"
+msgstr "С открытыми замечаниями"
+
+#: core/forms.py:124
+msgid "Without open issues"
+msgstr "Без открытых замечаний"
+
+#: core/forms.py:127 templates/core/machine_detail.html:26
+msgid "Installed equipment"
+msgstr "Установленное оборудование"
+
+#: core/forms.py:128
+msgid "With equipment"
+msgstr "С оборудованием"
+
+#: core/forms.py:128
+msgid "Without equipment"
+msgstr "Без оборудования"
+
+#: core/forms.py:131 core/forms.py:196 core/forms.py:210
+msgid "Equipment type"
+msgstr "Тип оборудования"
+
+#: core/forms.py:131 core/forms.py:196
+msgid "All types"
+msgstr "Все типы"
+
+#: core/forms.py:134 core/forms.py:175 core/forms.py:208
+msgid "Sort by"
+msgstr "Сортировать по"
+
+#: core/forms.py:136
+msgid "Model / factory number"
+msgstr "Модель / заводской номер"
+
+#: core/forms.py:136 templates/core/machine_detail.html:117
+msgid "Factory number"
+msgstr "Заводской номер"
+
+#: core/forms.py:148
+msgid "Number, model, owner, region or equipment serial number"
+msgstr "Номер, модель, владелец, регион или серийный номер оборудования"
+
+#: core/forms.py:150 core/forms.py:205
+msgid "All owners"
+msgstr "Все владельцы"
+
+#: core/forms.py:150
+msgid "Owner not recorded"
+msgstr "Владелец не указан"
+
+#: core/forms.py:164 templates/core/counterparty_detail.html:20
+#: templates/core/counterparty_list.html:39
+msgid "Active"
+msgstr "Активен"
+
+#: core/forms.py:164 core/tests/test_views.py:137 core/tests/test_views.py:139
+#: templates/core/counterparty_detail.html:20
+#: templates/core/counterparty_list.html:39
+msgid "Inactive"
+msgstr "Неактивен"
+
+#: core/forms.py:167 templates/base.html:15
+#: templates/core/counterparty_detail.html:30
+#: templates/core/counterparty_list.html:24 templates/core/machine_list.html:4
+#: templates/core/machine_list.html:8
+msgid "Machines"
+msgstr "Машины"
+
+#: core/forms.py:168 core/forms.py:172
+msgid "All counterparties"
+msgstr "Все контрагенты"
+
+#: core/forms.py:168 core/tests/test_list_filters.py:229
+msgid "With machines"
+msgstr "С машинами"
+
+#: core/forms.py:168
+msgid "Without machines"
+msgstr "Без машин"
+
+#: core/forms.py:171 templates/core/counterparty_list.html:25
+msgid "Active contacts"
+msgstr "Действующие контакты"
+
+#: core/forms.py:172
+msgid "With active contacts"
+msgstr "С действующими контактами"
+
+#: core/forms.py:172
+msgid "Without active contacts"
+msgstr "Без действующих контактов"
+
+#: core/forms.py:177
+msgid "Name"
+msgstr "Название"
+
+#: core/forms.py:177 templates/core/counterparty_detail.html:18
+#: templates/core/counterparty_list.html:22
+#: templates/core/machine_detail.html:94
+msgid "INN"
+msgstr "ИНН"
+
+#: core/forms.py:178
+msgid "Machine count"
+msgstr "Количество машин"
+
+#: core/forms.py:178
+msgid "Active contact count"
+msgstr "Количество действующих контактов"
+
+#: core/forms.py:188
+msgid "Name, INN, region, contact or machine"
+msgstr "Название, ИНН, регион, контакт или машина"
+
+#: core/forms.py:199 core/forms.py:211 templates/core/equipment_list.html:25
+msgid "Equipment state"
+msgstr "Состояние оборудования"
+
+#: core/forms.py:199
+msgid "All states"
+msgstr "Все состояния"
+
+#: core/forms.py:202 core/forms.py:212 templates/core/_machine_table.html:6
+#: templates/core/equipment_detail.html:33
+#: templates/core/equipment_list.html:26 templates/core/machine_detail.html:113
+msgid "Machine"
+msgstr "Машина"
+
+#: core/forms.py:210 templates/core/equipment_detail.html:23
+#: templates/core/equipment_list.html:22 templates/core/machine_detail.html:32
+msgid "Serial number"
+msgstr "Серийный номер"
+
+#: core/forms.py:210 templates/core/equipment_detail.html:24
+#: templates/core/equipment_list.html:23 templates/core/machine_detail.html:33
+msgid "Year"
+msgstr "Год"
+
+#: core/forms.py:211 core/forms.py:258
 msgid "Software version"
 msgstr "Версия ПО"
 
-#: core/forms.py:69
+#: core/forms.py:219
+msgid "Serial number, type, machine or owner"
+msgstr "Серийный номер, тип, машина или владелец"
+
+#: core/forms.py:226
+msgid "Event date"
+msgstr "Дата события"
+
+#: core/forms.py:228
+msgid "Source"
+msgstr "Источник"
+
+#: core/forms.py:229
+msgid "Who reported it"
+msgstr "Кто сообщил"
+
+#: core/forms.py:230 core/forms.py:290
+msgid "Title"
+msgstr "Заголовок"
+
+#: core/forms.py:232 core/forms.py:291
+msgid "Description"
+msgstr "Описание"
+
+#: core/forms.py:236
+msgid "Plain text or Markdown: **bold**, lists with “-”, links."
+msgstr "Обычный текст или Markdown: **жирный**, списки через «-», ссылки."
+
+#: core/forms.py:252 core/forms.py:264 core/forms.py:266 templates/base.html:17
+#: templates/core/equipment_detail.html:7 templates/core/equipment_list.html:4
+#: templates/core/equipment_list.html:8
+msgid "Equipment"
+msgstr "Оборудование"
+
+#: core/forms.py:261
 msgid "Leave empty to keep the version recorded for this unit."
 msgstr "Оставьте пустым, чтобы сохранить текущую версию этого оборудования."
 
-#: core/forms.py:75
+#: core/forms.py:267
 msgid "New software version"
 msgstr "Новая версия ПО"
 
-#: core/forms.py:78 templates/core/_entry.html:17
+#: core/forms.py:270 templates/core/_entry.html:18
 msgid "New owner"
 msgstr "Новый владелец"
 
-#: core/forms.py:83 templates/core/_entry.html:18
+#: core/forms.py:275 templates/core/_entry.html:19
 msgid "New status"
 msgstr "Новый статус"
 
-#: core/forms.py:88
+#: core/forms.py:280
 msgid "Resolved issues"
 msgstr "Устранённые замечания"
 
@@ -543,100 +794,127 @@ msgstr "Слишком длинный текст."
 msgid "%(equipment)s is not installed on this machine."
 msgstr "%(equipment)s не установлено на этой машине."
 
-#: core/tests/test_views.py:62 templates/core/counterparty_list.html:40
+#: core/tests/test_equipment_views.py:81 templates/core/equipment_list.html:42
+msgid "No equipment found."
+msgstr "Оборудование не найдено."
+
+#: core/tests/test_equipment_views.py:140
+#: core/tests/test_equipment_views.py:182
+#: core/tests/test_equipment_views.py:195
+#: templates/core/equipment_detail.html:38
+msgid "Not installed on a machine."
+msgstr "Не установлено на машине."
+
+#: core/tests/test_equipment_views.py:194
+#: templates/core/equipment_detail.html:58
+#: templates/core/machine_detail.html:74
+msgid "No entries yet."
+msgstr "Записей пока нет."
+
+#: core/tests/test_views.py:55 templates/core/counterparty_list.html:42
 msgid "No counterparties found."
 msgstr "Контрагенты не найдены."
 
-#: core/tests/test_views.py:144 core/tests/test_views.py:146
-#: templates/core/counterparty_detail.html:20
-#: templates/core/counterparty_list.html:37
-msgid "Inactive"
-msgstr "Неактивен"
-
-#: core/tests/test_views.py:147 templates/core/_machine_table.html:29
+#: core/tests/test_views.py:140 templates/core/_machine_table.html:29
 msgid "No machines found."
 msgstr "Машины не найдены."
 
-#: core/tests/test_views.py:148 templates/core/counterparty_detail.html:45
+#: core/tests/test_views.py:141 templates/core/counterparty_detail.html:45
 msgid "No active contacts."
 msgstr "Нет действующих контактных лиц."
 
-#: core/views.py:109
+#: core/views.py:282
 msgid "Entry added."
 msgstr "Запись добавлена."
 
-#: core/views.py:141
+#: core/views.py:314
 msgid "Entry updated, the previous version is kept."
 msgstr "Запись изменена, предыдущая версия сохранена."
 
-#: templates/base.html:14 templates/core/counterparty_detail.html:30
-#: templates/core/counterparty_list.html:26 templates/core/machine_list.html:4
-#: templates/core/machine_list.html:8
-msgid "Machines"
-msgstr "Машины"
-
-#: templates/base.html:15 templates/core/counterparty_detail.html:7
+#: templates/base.html:16 templates/core/counterparty_detail.html:7
 #: templates/core/counterparty_list.html:4
 #: templates/core/counterparty_list.html:8
 msgid "Counterparties"
 msgstr "Контрагенты"
 
-#: templates/base.html:17
+#: templates/base.html:19
 msgid "Administration"
 msgstr "Администрирование"
 
-#: templates/base.html:21
+#: templates/base.html:23
 msgid "Log out"
 msgstr "Выйти"
 
-#: templates/core/_entry.html:11
+#: templates/core/_entry.html:12
 msgid "reported by"
 msgstr "сообщил(а)"
 
-#: templates/core/_entry.html:12
+#: templates/core/_entry.html:13
 msgid "edited"
 msgstr "изменено"
 
-#: templates/core/_entry.html:16
+#: templates/core/_entry.html:17
 msgid "software"
 msgstr "ПО"
 
-#: templates/core/_entry.html:20
+#: templates/core/_entry.html:21
 msgid "Resolved"
 msgstr "Устранено"
 
-#: templates/core/_entry.html:25
+#: templates/core/_entry.html:26
 msgid "Resolved by"
 msgstr "Устранено записью"
 
-#: templates/core/_machine_table.html:6 templates/core/machine_detail.html:113
-msgid "Machine"
-msgstr "Машина"
+#: templates/core/_list_filters.html:25
+msgid "More filters"
+msgstr "Дополнительные фильтры"
 
-#: templates/core/_machine_table.html:8 templates/core/machine_detail.html:89
-msgid "Owner"
-msgstr "Владелец"
+#: templates/core/_list_filters.html:47
+msgid "Applied filters"
+msgstr "Применённые фильтры"
 
-#: templates/core/_machine_table.html:9
-#: templates/core/counterparty_detail.html:19
-#: templates/core/counterparty_list.html:25
-#: templates/core/machine_detail.html:93
-msgid "Region"
-msgstr "Регион"
+#: templates/core/_list_filters.html:49
+#, python-format
+msgid "Remove filter: %(label)s: %(value)s"
+msgstr "Убрать фильтр: %(label)s: %(value)s"
 
-#: templates/core/_machine_table.html:11
-#: templates/core/counterparty_detail.html:20
-#: templates/core/counterparty_list.html:27
-msgid "Status"
-msgstr "Статус"
+#: templates/core/_list_filters.html:53
+msgid "Reset filters"
+msgstr "Сбросить фильтры"
 
-#: templates/core/_machine_table.html:12 templates/core/machine_detail.html:16
-msgid "Open issues"
-msgstr "Открытые замечания"
+#: templates/core/_list_filters.html:60
+#, python-format
+msgid "Found: %(count)s"
+msgstr "Найдено: %(count)s"
 
-#: templates/core/_machine_table.html:13 templates/core/machine_detail.html:118
-msgid "Last contact"
-msgstr "Последний контакт"
+#: templates/core/_list_filters.html:61
+#, python-format
+msgid "Showing %(start)s–%(end)s"
+msgstr "Показаны %(start)s–%(end)s"
+
+#: templates/core/_list_filters.html:67
+msgid "Apply"
+msgstr "Применить"
+
+#: templates/core/_list_pagination.html:3
+msgid "Pagination"
+msgstr "Страницы"
+
+#: templates/core/_list_pagination.html:5
+msgid "First"
+msgstr "Первая"
+
+#: templates/core/_list_pagination.html:6
+msgid "Previous"
+msgstr "Предыдущая"
+
+#: templates/core/_list_pagination.html:10
+msgid "Next"
+msgstr "Следующая"
+
+#: templates/core/_list_pagination.html:11
+msgid "Last"
+msgstr "Последняя"
 
 #: templates/core/counterparty_detail.html:11
 msgid "Edit counterparty"
@@ -645,17 +923,6 @@ msgstr "Изменить контрагента"
 #: templates/core/counterparty_detail.html:16
 msgid "Details"
 msgstr "Реквизиты"
-
-#: templates/core/counterparty_detail.html:18
-#: templates/core/counterparty_list.html:24
-#: templates/core/machine_detail.html:94
-msgid "INN"
-msgstr "ИНН"
-
-#: templates/core/counterparty_detail.html:20
-#: templates/core/counterparty_list.html:37
-msgid "Active"
-msgstr "Активен"
 
 #: templates/core/counterparty_detail.html:23
 msgid "Notes"
@@ -670,18 +937,56 @@ msgstr "Контакты"
 msgid "Add counterparty"
 msgstr "Добавить контрагента"
 
-#: templates/core/counterparty_list.html:15
-msgid "Name, INN or region"
-msgstr "Название, ИНН или регион"
-
-#: templates/core/counterparty_list.html:16 templates/core/machine_list.html:16
-msgid "Find"
-msgstr "Найти"
-
-#: templates/core/counterparty_list.html:23
+#: templates/core/counterparty_list.html:21
 #: templates/core/machine_detail.html:92
 msgid "Counterparty"
 msgstr "Контрагент"
+
+#: templates/core/equipment_detail.html:16
+msgid "Equipment details"
+msgstr "Сведения об оборудовании"
+
+#: templates/core/equipment_detail.html:18
+msgid "Edit equipment"
+msgstr "Изменить оборудование"
+
+#: templates/core/equipment_detail.html:22
+#: templates/core/equipment_list.html:21 templates/core/machine_detail.html:31
+msgid "Type"
+msgstr "Тип"
+
+#: templates/core/equipment_detail.html:25
+#: templates/core/equipment_list.html:24 templates/core/machine_detail.html:34
+msgid "Software"
+msgstr "ПО"
+
+#: templates/core/equipment_detail.html:30
+msgid "Location"
+msgstr "Размещение"
+
+#: templates/core/equipment_detail.html:45
+#: templates/core/machine_detail.html:57
+msgid "History"
+msgstr "История"
+
+#: templates/core/equipment_detail.html:48
+#: templates/core/machine_detail.html:64
+msgid "All"
+msgstr "Все"
+
+#: templates/core/equipment_detail.html:63
+#: templates/core/machine_detail.html:79
+msgid "Newer"
+msgstr "Новые"
+
+#: templates/core/equipment_detail.html:65
+#: templates/core/machine_detail.html:81
+msgid "Older"
+msgstr "Старые"
+
+#: templates/core/equipment_list.html:10
+msgid "Add equipment"
+msgstr "Добавить оборудование"
 
 #: templates/core/log_entry_amend.html:4 templates/core/log_entry_amend.html:9
 msgid "Edit entry"
@@ -737,26 +1042,6 @@ msgstr "Новая запись"
 msgid "What happened?"
 msgstr "Что произошло?"
 
-#: templates/core/machine_detail.html:26
-msgid "Installed equipment"
-msgstr "Установленное оборудование"
-
-#: templates/core/machine_detail.html:31
-msgid "Type"
-msgstr "Тип"
-
-#: templates/core/machine_detail.html:32
-msgid "Serial number"
-msgstr "Серийный номер"
-
-#: templates/core/machine_detail.html:33
-msgid "Year"
-msgstr "Год"
-
-#: templates/core/machine_detail.html:34
-msgid "Software"
-msgstr "ПО"
-
 #: templates/core/machine_detail.html:35
 msgid "Installed"
 msgstr "Установлено"
@@ -765,49 +1050,17 @@ msgstr "Установлено"
 msgid "No equipment installed."
 msgstr "Оборудование не установлено."
 
-#: templates/core/machine_detail.html:57
-msgid "History"
-msgstr "История"
-
-#: templates/core/machine_detail.html:64
-msgid "All"
-msgstr "Все"
-
-#: templates/core/machine_detail.html:74
-msgid "No entries yet."
-msgstr "Записей пока нет."
-
-#: templates/core/machine_detail.html:79
-msgid "Newer"
-msgstr "Новые"
-
-#: templates/core/machine_detail.html:81
-msgid "Older"
-msgstr "Старые"
-
 #: templates/core/machine_detail.html:108
 msgid "Owner is not recorded yet."
 msgstr "Владелец ещё не записан."
-
-#: templates/core/machine_detail.html:115
-msgid "Model"
-msgstr "Модель"
 
 #: templates/core/machine_detail.html:116
 msgid "Manufacturer"
 msgstr "Производитель"
 
-#: templates/core/machine_detail.html:117
-msgid "Factory number"
-msgstr "Заводской номер"
-
 #: templates/core/machine_list.html:10
 msgid "Add machine"
 msgstr "Добавить машину"
-
-#: templates/core/machine_list.html:15
-msgid "Number, model, owner or region"
-msgstr "Номер, модель, владелец или регион"
 
 #: templates/registration/login.html:4 templates/registration/login.html:8
 #: templates/registration/login.html:19
@@ -821,3 +1074,12 @@ msgstr "Имя пользователя"
 #: templates/registration/login.html:16
 msgid "Password"
 msgstr "Пароль"
+
+#~ msgid "Find"
+#~ msgstr "Найти"
+
+#~ msgid "Filters and sorting"
+#~ msgstr "Фильтры и сортировка"
+
+#~ msgid "Name, INN or region"
+#~ msgstr "Название, ИНН или регион"

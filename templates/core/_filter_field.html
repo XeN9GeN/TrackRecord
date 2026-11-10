@@ -1,0 +1,5 @@
+<div class="filter-field{% if field.errors %} filter-field-invalid{% endif %}">
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  {{ field }}
+  {{ field.errors }}
+</div>

@@ -6,15 +6,8 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from core.models import ContactPerson, LogKind, MachineStatus
-from core.roles import ADMINISTRATOR, ENGINEER
+from core.roles import ADMINISTRATOR
 from core.services import create_log_entry
-
-
-@pytest.fixture
-def client_logged_in(client, engineer):
-    engineer.groups.add(Group.objects.get(name=ENGINEER))
-    client.force_login(engineer)
-    return client
 
 
 def test_pages_require_login(client, machine, counterparty):

@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %} · TrackRecord</title>
-  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  {# Bump this revision when app.css changes so cached styles match the templates. #}
+  <link rel="stylesheet" href="{% static 'css/app.css' %}?v=20261111-1">
 </head>
 <body>
   <header class="topbar">
@@ -13,6 +14,7 @@
       <nav class="topnav">
         <a href="{% url 'core:home' %}">{% translate "Machines" %}</a>
         <a href="{% url 'core:counterparty_list' %}">{% translate "Counterparties" %}</a>
+        <a href="{% url 'core:equipment_list' %}">{% translate "Equipment" %}</a>
         {% block nav %}{% endblock %}
         {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Administration" %}</a>{% endif %}
         <span class="muted">{{ user.get_full_name|default:user.username }}</span>

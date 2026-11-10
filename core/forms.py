@@ -8,9 +8,12 @@ from .models import (
     Counterparty,
     Equipment,
     EquipmentState,
+    EquipmentType,
     LogEntry,
     LogKind,
     LogSource,
+    Machine,
+    MachineModel,
     MachineStatus,
 )
 
@@ -25,6 +28,178 @@ TEXT_SKELETONS = {
     LogKind.EQUIPMENT_INSTALL: _("**Where it is mounted:** \n\n**Connection notes:** "),
     LogKind.EQUIPMENT_REMOVAL: _("**Reason:** \n\n**Where the equipment went:** "),
 }
+
+
+class DirectoryFilterForm(forms.Form):
+    primary_filter_names = ()
+    additional_filter_groups = ()
+
+    q = forms.CharField(
+        label=_("Search"), required=False, max_length=255,
+        widget=forms.TextInput(attrs={"type": "search"}),
+        help_text=_("Use several words to narrow the search; all words must match."),
+    )
+    direction = forms.ChoiceField(
+        label=_("Direction"), required=False,
+        choices=[("asc", _("Ascending")), ("desc", _("Descending"))],
+    )
+    per_page = forms.TypedChoiceField(
+        label=_("Rows per page"), required=False, coerce=int,
+        choices=[(25, "25"), (50, "50"), (100, "100")],
+    )
+
+    @property
+    def primary_filters(self):
+        return [self[name] for name in self.primary_filter_names]
+
+    @property
+    def additional_filters(self):
+        return [
+            {"label": label, "fields": [self[name] for name in names]}
+            for label, names in self.additional_filter_groups
+        ]
+
+
+class ListFilterForm(DirectoryFilterForm):
+    region = forms.ChoiceField(label=_("Region"), required=False)
+    contact = forms.ChoiceField(
+        label=_("Last contact"), required=False,
+        choices=[("", _("Any date")), ("never", _("Never contacted")), ("overdue", _("No contact in 90 days"))],
+    )
+    contact_from = forms.DateField(
+        label=_("Last contact from"), required=False,
+        widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+    )
+    contact_to = forms.DateField(
+        label=_("Last contact through"), required=False,
+        widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        regions = Counterparty.objects.exclude(region="").order_by("region").values_list("region", flat=True).distinct()
+        self.fields["region"].choices = [("", _("All regions")), *[(region, region) for region in regions]]
+
+    def clean(self):
+        data = super().clean()
+        start, end = data.get("contact_from"), data.get("contact_to")
+        if start and end and start > end:
+            data.pop("contact_from")
+            data.pop("contact_to")
+            raise forms.ValidationError(_("Last contact start date must not be after the end date."))
+        return data
+
+
+class MachineFilterForm(ListFilterForm):
+    primary_filter_names = ("model", "owner", "region", "status")
+    additional_filter_groups = (
+        (_("Condition and equipment"), ("issues", "equipment", "equipment_type")),
+        (_("Last contact"), ("contact", "contact_from", "contact_to")),
+    )
+
+    status = forms.ChoiceField(
+        label=_("Status"), required=False, choices=[("", _("All statuses")), *MachineStatus.choices],
+    )
+    model = forms.ModelChoiceField(
+        label=_("Model"), required=False, queryset=MachineModel.objects.all(), empty_label=_("All models"),
+    )
+    owner = forms.ChoiceField(label=_("Owner"), required=False)
+    issues = forms.ChoiceField(
+        label=_("Open issues"), required=False,
+        choices=[("", _("All machines")), ("yes", _("With open issues")), ("no", _("Without open issues"))],
+    )
+    equipment = forms.ChoiceField(
+        label=_("Installed equipment"), required=False,
+        choices=[("", _("All machines")), ("yes", _("With equipment")), ("no", _("Without equipment"))],
+    )
+    equipment_type = forms.ModelChoiceField(
+        label=_("Equipment type"), required=False, queryset=EquipmentType.objects.all(), empty_label=_("All types"),
+    )
+    sort = forms.ChoiceField(
+        label=_("Sort by"), required=False,
+        choices=[
+            ("machine", _("Model / factory number")), ("number", _("Factory number")),
+            ("owner", _("Owner")), ("region", _("Region")),
+            ("issues", _("Open issues")), ("contact", _("Last contact")),
+        ],
+    )
+    field_order = [
+        "q", "model", "owner", "region", "status", "issues", "equipment", "equipment_type",
+        "contact", "contact_from", "contact_to", "sort", "direction", "per_page",
+    ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["q"].widget.attrs["placeholder"] = _("Number, model, owner, region or equipment serial number")
+        self.fields["owner"].choices = [
+            ("", _("All owners")), ("unassigned", _("Owner not recorded")),
+            *Counterparty.objects.order_by("name", "pk").values_list("pk", "name"),
+        ]
+
+
+class CounterpartyFilterForm(ListFilterForm):
+    primary_filter_names = ("activity", "region", "machines", "contacts")
+    additional_filter_groups = (
+        (_("Last contact"), ("contact", "contact_from", "contact_to")),
+    )
+
+    activity = forms.ChoiceField(
+        label=_("Status"), required=False,
+        choices=[("", _("All statuses")), ("active", _("Active")), ("inactive", _("Inactive"))],
+    )
+    machines = forms.ChoiceField(
+        label=_("Machines"), required=False,
+        choices=[("", _("All counterparties")), ("yes", _("With machines")), ("no", _("Without machines"))],
+    )
+    contacts = forms.ChoiceField(
+        label=_("Active contacts"), required=False,
+        choices=[("", _("All counterparties")), ("yes", _("With active contacts")), ("no", _("Without active contacts"))],
+    )
+    sort = forms.ChoiceField(
+        label=_("Sort by"), required=False,
+        choices=[
+            ("name", _("Name")), ("inn", _("INN")), ("region", _("Region")),
+            ("machines", _("Machine count")), ("contacts", _("Active contact count")), ("contact", _("Last contact")),
+        ],
+    )
+    field_order = [
+        "q", "activity", "region", "machines", "contacts", "contact", "contact_from", "contact_to",
+        "sort", "direction", "per_page",
+    ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["q"].widget.attrs["placeholder"] = _("Name, INN, region, contact or machine")
+
+
+class EquipmentFilterForm(DirectoryFilterForm):
+    primary_filter_names = ("type", "state", "machine", "owner")
+
+    type = forms.ModelChoiceField(
+        label=_("Equipment type"), required=False, queryset=EquipmentType.objects.all(), empty_label=_("All types"),
+    )
+    state = forms.ChoiceField(
+        label=_("Equipment state"), required=False, choices=[("", _("All states")), *EquipmentState.choices],
+    )
+    machine = forms.ModelChoiceField(
+        label=_("Machine"), required=False, queryset=Machine.objects.select_related("model"), empty_label=_("All machines"),
+    )
+    owner = forms.ModelChoiceField(
+        label=_("Owner"), required=False, queryset=Counterparty.objects.all(), empty_label=_("All owners"),
+    )
+    sort = forms.ChoiceField(
+        label=_("Sort by"), required=False,
+        choices=[
+            ("type", _("Equipment type")), ("serial", _("Serial number")), ("year", _("Year")),
+            ("software", _("Software version")), ("state", _("Equipment state")),
+            ("machine", _("Machine")), ("owner", _("Owner")),
+        ],
+    )
+    field_order = ["q", "type", "state", "machine", "owner", "sort", "direction", "per_page"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["q"].widget.attrs["placeholder"] = _("Serial number, type, machine or owner")
 
 
 class LogEntryForm(forms.Form):
