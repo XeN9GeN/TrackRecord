@@ -130,6 +130,23 @@ textarea { min-height: 12rem; font-family: ui-monospace, "SFMono-Regular", Menlo
 .list-filters :is(input, select):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .list-filters :is(a, button, summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .filter-field { min-width: 0; }
+.searchable-select { position: relative; }
+.list-filters .searchable-select input { padding-right: 2.5rem; }
+.searchable-select-toggle {
+  position: absolute; top: 0; right: 0; width: 2.5rem; height: 42px;
+  padding: 0; border: 0; border-radius: 0 6px 6px 0; background: transparent;
+  color: var(--muted); font: inherit; font-size: 1.25rem; cursor: pointer;
+}
+.searchable-select-dropdown {
+  position: absolute; top: calc(100% + .35rem); left: 0; right: 0; z-index: 20;
+  max-height: 240px; overflow-y: auto; overscroll-behavior: contain; padding: .3rem;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--surface);
+  box-shadow: 0 8px 24px #1822301a;
+}
+.searchable-select-option { padding: .55rem .65rem; border-radius: 4px; cursor: pointer; overflow-wrap: anywhere; }
+.searchable-select-option[aria-selected=true] { color: var(--accent); font-weight: 600; }
+.searchable-select-option:hover, .searchable-select-option.is-active { background: var(--accent-soft); }
+.searchable-select-empty { padding: .55rem .65rem; color: var(--muted); font-size: .85rem; }
 .filter-field-invalid :is(input, select) { border-color: var(--danger); }
 .filter-help { margin: .4rem 0 0; font-size: .8rem; }
 .list-filters .errorlist { font-size: .85rem; margin: .4rem 0; }

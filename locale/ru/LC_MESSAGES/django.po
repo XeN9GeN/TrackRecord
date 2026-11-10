@@ -99,6 +99,18 @@ msgstr "По убыванию"
 msgid "Rows per page"
 msgstr "Строк на странице"
 
+#: core/forms.py:57
+msgid "Type to filter options"
+msgstr "Начните вводить для поиска вариантов"
+
+#: core/forms.py:58
+msgid "No matching options."
+msgstr "Подходящих вариантов нет."
+
+#: core/forms.py:59
+msgid "Show options"
+msgstr "Показать варианты"
+
 #: core/forms.py:78 core/forms.py:137 core/forms.py:177
 #: templates/core/_machine_table.html:9
 #: templates/core/counterparty_detail.html:19

@@ -33,6 +33,7 @@ TEXT_SKELETONS = {
 class DirectoryFilterForm(forms.Form):
     primary_filter_names = ()
     additional_filter_groups = ()
+    searchable_filter_names = ()
 
     q = forms.CharField(
         label=_("Search"), required=False, max_length=255,
@@ -47,6 +48,19 @@ class DirectoryFilterForm(forms.Form):
         label=_("Rows per page"), required=False, coerce=int,
         choices=[(25, "25"), (50, "50"), (100, "100")],
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name in self.searchable_filter_names:
+            self.fields[name].widget.attrs.update({
+                "data-searchable-select": "true",
+                "data-search-placeholder": _("Type to filter options"),
+                "data-no-results": _("No matching options."),
+                "data-open-label": _("Show options"),
+            })
+
+    class Media:
+        js = ("js/searchable-select.js",)
 
     @property
     def primary_filters(self):
@@ -92,6 +106,7 @@ class ListFilterForm(DirectoryFilterForm):
 
 class MachineFilterForm(ListFilterForm):
     primary_filter_names = ("model", "owner", "region", "status")
+    searchable_filter_names = ("model", "owner", "region", "equipment_type")
     additional_filter_groups = (
         (_("Condition and equipment"), ("issues", "equipment", "equipment_type")),
         (_("Last contact"), ("contact", "contact_from", "contact_to")),
@@ -139,6 +154,7 @@ class MachineFilterForm(ListFilterForm):
 
 class CounterpartyFilterForm(ListFilterForm):
     primary_filter_names = ("activity", "region", "machines", "contacts")
+    searchable_filter_names = ("region",)
     additional_filter_groups = (
         (_("Last contact"), ("contact", "contact_from", "contact_to")),
     )
@@ -174,6 +190,7 @@ class CounterpartyFilterForm(ListFilterForm):
 
 class EquipmentFilterForm(DirectoryFilterForm):
     primary_filter_names = ("type", "state", "machine", "owner")
+    searchable_filter_names = ("type", "machine", "owner")
 
     type = forms.ModelChoiceField(
         label=_("Equipment type"), required=False, queryset=EquipmentType.objects.all(), empty_label=_("All types"),

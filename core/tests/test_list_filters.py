@@ -350,3 +350,18 @@ def test_equipment_invalid_filters_keep_valid_conditions(client_logged_in, direc
     response = client_logged_in.get(reverse("core:equipment_list"), params)
     assert set(response.context["filter_form"].errors) == {"type", "machine", "owner", "sort"}
     assert [unit.serial_number for unit in response.context["equipment"]] == ["STOCK-ONLY"]
+
+
+@pytest.mark.parametrize(("route", "fields"), [
+    ("home", {"model", "owner", "region", "equipment_type"}),
+    ("counterparty_list", {"region"}),
+    ("equipment_list", {"type", "machine", "owner"}),
+])
+def test_directory_searchable_fields_keep_native_choices(client_logged_in, directory, route, fields):
+    response = client_logged_in.get(reverse(f"core:{route}"))
+    form = response.context["filter_form"]
+    assert {name for name, field in form.fields.items() if field.widget.attrs.get("data-searchable-select")} == fields
+    for name in fields:
+        assert f'name="{name}"' in response.content.decode()
+        assert form.fields[name].choices
+    assert "js/searchable-select.js" in response.content.decode()
