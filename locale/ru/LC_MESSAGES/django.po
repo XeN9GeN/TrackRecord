@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TrackRecord\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-10 00:15+0700\n"
+"POT-Creation-Date: 2026-11-11 00:19+0700\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,7 +13,7 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: core/admin.py:16
+#: core/admin.py:18
 msgid "TrackRecord administration"
 msgstr "Администрирование TrackRecord"
 
@@ -543,19 +543,49 @@ msgstr "Слишком длинный текст."
 msgid "%(equipment)s is not installed on this machine."
 msgstr "%(equipment)s не установлено на этой машине."
 
-#: core/views.py:81
+#: core/tests/test_views.py:62 templates/core/counterparty_list.html:40
+msgid "No counterparties found."
+msgstr "Контрагенты не найдены."
+
+#: core/tests/test_views.py:144 core/tests/test_views.py:146
+#: templates/core/counterparty_detail.html:20
+#: templates/core/counterparty_list.html:37
+msgid "Inactive"
+msgstr "Неактивен"
+
+#: core/tests/test_views.py:147 templates/core/_machine_table.html:29
+msgid "No machines found."
+msgstr "Машины не найдены."
+
+#: core/tests/test_views.py:148 templates/core/counterparty_detail.html:45
+msgid "No active contacts."
+msgstr "Нет действующих контактных лиц."
+
+#: core/views.py:109
 msgid "Entry added."
 msgstr "Запись добавлена."
 
-#: core/views.py:113
+#: core/views.py:141
 msgid "Entry updated, the previous version is kept."
 msgstr "Запись изменена, предыдущая версия сохранена."
 
-#: templates/base.html:15
+#: templates/base.html:14 templates/core/counterparty_detail.html:30
+#: templates/core/counterparty_list.html:26 templates/core/machine_list.html:4
+#: templates/core/machine_list.html:8
+msgid "Machines"
+msgstr "Машины"
+
+#: templates/base.html:15 templates/core/counterparty_detail.html:7
+#: templates/core/counterparty_list.html:4
+#: templates/core/counterparty_list.html:8
+msgid "Counterparties"
+msgstr "Контрагенты"
+
+#: templates/base.html:17
 msgid "Administration"
 msgstr "Администрирование"
 
-#: templates/base.html:19
+#: templates/base.html:21
 msgid "Log out"
 msgstr "Выйти"
 
@@ -578,6 +608,80 @@ msgstr "Устранено"
 #: templates/core/_entry.html:25
 msgid "Resolved by"
 msgstr "Устранено записью"
+
+#: templates/core/_machine_table.html:6 templates/core/machine_detail.html:113
+msgid "Machine"
+msgstr "Машина"
+
+#: templates/core/_machine_table.html:8 templates/core/machine_detail.html:89
+msgid "Owner"
+msgstr "Владелец"
+
+#: templates/core/_machine_table.html:9
+#: templates/core/counterparty_detail.html:19
+#: templates/core/counterparty_list.html:25
+#: templates/core/machine_detail.html:93
+msgid "Region"
+msgstr "Регион"
+
+#: templates/core/_machine_table.html:11
+#: templates/core/counterparty_detail.html:20
+#: templates/core/counterparty_list.html:27
+msgid "Status"
+msgstr "Статус"
+
+#: templates/core/_machine_table.html:12 templates/core/machine_detail.html:16
+msgid "Open issues"
+msgstr "Открытые замечания"
+
+#: templates/core/_machine_table.html:13 templates/core/machine_detail.html:118
+msgid "Last contact"
+msgstr "Последний контакт"
+
+#: templates/core/counterparty_detail.html:11
+msgid "Edit counterparty"
+msgstr "Изменить контрагента"
+
+#: templates/core/counterparty_detail.html:16
+msgid "Details"
+msgstr "Реквизиты"
+
+#: templates/core/counterparty_detail.html:18
+#: templates/core/counterparty_list.html:24
+#: templates/core/machine_detail.html:94
+msgid "INN"
+msgstr "ИНН"
+
+#: templates/core/counterparty_detail.html:20
+#: templates/core/counterparty_list.html:37
+msgid "Active"
+msgstr "Активен"
+
+#: templates/core/counterparty_detail.html:23
+msgid "Notes"
+msgstr "Примечания"
+
+#: templates/core/counterparty_detail.html:35
+#: templates/core/machine_detail.html:97
+msgid "Contacts"
+msgstr "Контакты"
+
+#: templates/core/counterparty_list.html:10
+msgid "Add counterparty"
+msgstr "Добавить контрагента"
+
+#: templates/core/counterparty_list.html:15
+msgid "Name, INN or region"
+msgstr "Название, ИНН или регион"
+
+#: templates/core/counterparty_list.html:16 templates/core/machine_list.html:16
+msgid "Find"
+msgstr "Найти"
+
+#: templates/core/counterparty_list.html:23
+#: templates/core/machine_detail.html:92
+msgid "Counterparty"
+msgstr "Контрагент"
 
 #: templates/core/log_entry_amend.html:4 templates/core/log_entry_amend.html:9
 msgid "Edit entry"
@@ -633,10 +737,6 @@ msgstr "Новая запись"
 msgid "What happened?"
 msgstr "Что произошло?"
 
-#: templates/core/machine_detail.html:16 templates/core/machine_list.html:27
-msgid "Open issues"
-msgstr "Открытые замечания"
-
 #: templates/core/machine_detail.html:26
 msgid "Installed equipment"
 msgstr "Установленное оборудование"
@@ -685,33 +785,9 @@ msgstr "Новые"
 msgid "Older"
 msgstr "Старые"
 
-#: templates/core/machine_detail.html:89 templates/core/machine_list.html:24
-msgid "Owner"
-msgstr "Владелец"
-
-#: templates/core/machine_detail.html:92
-msgid "Counterparty"
-msgstr "Контрагент"
-
-#: templates/core/machine_detail.html:93 templates/core/machine_list.html:25
-msgid "Region"
-msgstr "Регион"
-
-#: templates/core/machine_detail.html:94
-msgid "INN"
-msgstr "ИНН"
-
-#: templates/core/machine_detail.html:97
-msgid "Contacts"
-msgstr "Контакты"
-
 #: templates/core/machine_detail.html:108
 msgid "Owner is not recorded yet."
 msgstr "Владелец ещё не записан."
-
-#: templates/core/machine_detail.html:113 templates/core/machine_list.html:23
-msgid "Machine"
-msgstr "Машина"
 
 #: templates/core/machine_detail.html:115
 msgid "Model"
@@ -725,14 +801,6 @@ msgstr "Производитель"
 msgid "Factory number"
 msgstr "Заводской номер"
 
-#: templates/core/machine_detail.html:118 templates/core/machine_list.html:28
-msgid "Last contact"
-msgstr "Последний контакт"
-
-#: templates/core/machine_list.html:4 templates/core/machine_list.html:8
-msgid "Machines"
-msgstr "Машины"
-
 #: templates/core/machine_list.html:10
 msgid "Add machine"
 msgstr "Добавить машину"
@@ -740,18 +808,6 @@ msgstr "Добавить машину"
 #: templates/core/machine_list.html:15
 msgid "Number, model, owner or region"
 msgstr "Номер, модель, владелец или регион"
-
-#: templates/core/machine_list.html:16
-msgid "Find"
-msgstr "Найти"
-
-#: templates/core/machine_list.html:26
-msgid "Status"
-msgstr "Статус"
-
-#: templates/core/machine_list.html:42
-msgid "No machines found."
-msgstr "Машины не найдены."
 
 #: templates/registration/login.html:4 templates/registration/login.html:8
 #: templates/registration/login.html:19

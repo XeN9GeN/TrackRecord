@@ -89,7 +89,7 @@
       <h2>{% translate "Owner" %}</h2>
       {% if machine.current_owner %}
         <dl class="facts">
-          <dt>{% translate "Counterparty" %}</dt><dd>{{ machine.current_owner }}</dd>
+          <dt>{% translate "Counterparty" %}</dt><dd><a href="{% url 'core:counterparty_detail' machine.current_owner.pk %}">{{ machine.current_owner }}</a></dd>
           <dt>{% translate "Region" %}</dt><dd>{{ machine.current_owner.region|default:"—" }}</dd>
           <dt>{% translate "INN" %}</dt><dd>{{ machine.current_owner.inn|default:"—" }}</dd>
         </dl>

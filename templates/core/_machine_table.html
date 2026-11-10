@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>{% translate "Machine" %}</th>
+        {% if show_owner %}
+          <th>{% translate "Owner" %}</th>
+          <th>{% translate "Region" %}</th>
+        {% endif %}
+        <th>{% translate "Status" %}</th>
+        <th>{% translate "Open issues" %}</th>
+        <th>{% translate "Last contact" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for machine in machines %}
+        <tr>
+          <td><a href="{% url 'core:machine_detail' machine.pk %}">{{ machine }}</a></td>
+          {% if show_owner %}
+            <td>{% if machine.current_owner %}<a href="{% url 'core:counterparty_detail' machine.current_owner.pk %}">{{ machine.current_owner }}</a>{% else %}—{% endif %}</td>
+            <td>{{ machine.current_owner.region|default:"—" }}</td>
+          {% endif %}
+          <td><span class="badge {{ machine.status }}">{{ machine.get_status_display }}</span></td>
+          <td>{% if machine.open_issues %}<span class="badge open">{{ machine.open_issues }}</span>{% else %}—{% endif %}</td>
+          <td>{{ machine.last_contact_at|date:"d.m.Y"|default:"—" }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="{% if show_owner %}6{% else %}4{% endif %}" class="muted">{% translate "No machines found." %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

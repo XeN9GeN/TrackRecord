@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n markdown_tags %}
+
+{% block title %}{{ counterparty.name }}{% endblock %}
+
+{% block content %}
+<p class="breadcrumb"><a href="{% url 'core:counterparty_list' %}">← {% translate "Counterparties" %}</a></p>
+<div class="row">
+  <h1>{{ counterparty.name }}</h1>
+  {% if perms.core.change_counterparty %}
+    <a class="button" href="{% url 'admin:core_counterparty_change' counterparty.pk %}">{% translate "Edit counterparty" %}</a>
+  {% endif %}
+</div>
+
+<section class="card">
+  <h2>{% translate "Details" %}</h2>
+  <dl class="facts">
+    <dt>{% translate "INN" %}</dt><dd>{{ counterparty.inn|default:"—" }}</dd>
+    <dt>{% translate "Region" %}</dt><dd>{{ counterparty.region|default:"—" }}</dd>
+    <dt>{% translate "Status" %}</dt><dd>{% if counterparty.is_active %}{% translate "Active" %}{% else %}{% translate "Inactive" %}{% endif %}</dd>
+  </dl>
+  {% if counterparty.notes %}
+    <h3>{% translate "Notes" %}</h3>
+    <div class="markdown">{{ counterparty.notes|render_markdown }}</div>
+  {% endif %}
+</section>
+
+<div class="grid">
+  <section class="card">
+    <h2>{% translate "Machines" %} ({{ machines|length }})</h2>
+    {% include "core/_machine_table.html" with show_owner=False %}
+  </section>
+  <aside>
+    <section class="card">
+      <h2>{% translate "Contacts" %}</h2>
+      {% for contact in contacts %}
+        <div class="contact">
+          <h3>{{ contact.full_name }}</h3>
+          {% if contact.position %}<div class="muted">{{ contact.position }}</div>{% endif %}
+          {% if contact.phones %}<div>{{ contact.phones }}</div>{% endif %}
+          {% if contact.email %}<div><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></div>{% endif %}
+          {% if contact.notes %}<div class="markdown">{{ contact.notes|render_markdown }}</div>{% endif %}
+        </div>
+      {% empty %}
+        <p class="muted">{% translate "No active contacts." %}</p>
+      {% endfor %}
+    </section>
+  </aside>
+</div>
+{% endblock %}

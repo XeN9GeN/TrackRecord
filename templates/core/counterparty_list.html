@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Counterparties" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <h1>{% translate "Counterparties" %}</h1>
+  {% if perms.core.add_counterparty %}
+    <a class="button" href="{% url 'admin:core_counterparty_add' %}">{% translate "Add counterparty" %}</a>
+  {% endif %}
+</div>
+
+<form method="get" class="search" role="search">
+  <input type="search" name="q" value="{{ query }}" aria-label="{% translate 'Name, INN or region' %}" placeholder="{% translate 'Name, INN or region' %}">
+  <button type="submit" class="button">{% translate "Find" %}</button>
+</form>
+
+<section class="card table-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>{% translate "Counterparty" %}</th>
+        <th>{% translate "INN" %}</th>
+        <th>{% translate "Region" %}</th>
+        <th>{% translate "Machines" %}</th>
+        <th>{% translate "Status" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for counterparty in counterparties %}
+        <tr>
+          <td><a href="{% url 'core:counterparty_detail' counterparty.pk %}">{{ counterparty.name }}</a></td>
+          <td>{{ counterparty.inn|default:"—" }}</td>
+          <td>{{ counterparty.region|default:"—" }}</td>
+          <td>{{ counterparty.machine_count }}</td>
+          <td>{% if counterparty.is_active %}{% translate "Active" %}{% else %}<span class="muted">{% translate "Inactive" %}</span>{% endif %}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5" class="muted">{% translate "No counterparties found." %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

@@ -8,8 +8,36 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 
 from .forms import FORM_KINDS, AmendLogEntryForm, LogEntryForm
-from .models import IssueStatus, LogEntry, LogKind, Machine
+from .models import Counterparty, IssueStatus, LogEntry, LogKind, Machine
 from .services import amend_log_entry, can_amend, create_log_entry
+
+
+@login_required
+def counterparty_list(request):
+    query = request.GET.get("q", "").strip()
+    counterparties = Counterparty.objects.defer("notes").annotate(machine_count=Count("machines"))
+    if query:
+        counterparties = counterparties.filter(
+            Q(name__icontains=query) | Q(inn__icontains=query) | Q(region__icontains=query)
+        )
+    counterparties = counterparties.order_by("name", "pk")
+    return render(request, "core/counterparty_list.html", {"counterparties": counterparties, "query": query})
+
+
+@login_required
+def counterparty_detail(request, pk):
+    counterparty = get_object_or_404(Counterparty, pk=pk)
+    machines = (
+        counterparty.machines.select_related("model")
+        .annotate(open_issues=Count("log_entries", filter=Q(log_entries__issue_status=IssueStatus.OPEN)))
+        .order_by("model__name", "factory_number")
+    )
+    context = {
+        "counterparty": counterparty,
+        "contacts": counterparty.contacts.filter(is_active=True),
+        "machines": machines,
+    }
+    return render(request, "core/counterparty_detail.html", context)
 
 
 @login_required

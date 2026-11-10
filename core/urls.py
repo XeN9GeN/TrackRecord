@@ -6,6 +6,8 @@ app_name = "core"
 
 urlpatterns = [
     path("", views.machine_list, name="home"),
+    path("counterparties/", views.counterparty_list, name="counterparty_list"),
+    path("counterparties/<int:pk>/", views.counterparty_detail, name="counterparty_detail"),
     path("machines/<int:pk>/", views.machine_detail, name="machine_detail"),
     path("machines/<int:machine_pk>/entries/new/", views.log_entry_create, name="log_entry_create"),
     path("entries/<int:pk>/", views.log_entry_detail, name="log_entry_detail"),

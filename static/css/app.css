@@ -54,7 +54,12 @@ h3, h4 { font-size: 1rem; margin: .75rem 0 .25rem; }
 
 .facts { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1rem; margin: 0; }
 .facts dt { color: var(--muted); }
-.facts dd { margin: 0; }
+.facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.grid > * { min-width: 0; }
+.table-scroll { overflow-x: auto; }
+.contact + .contact { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.contact { overflow-wrap: anywhere; }
+.breadcrumb { margin: 0 0 .75rem; }
 
 table { width: 100%; border-collapse: collapse; }
 th, td { text-align: left; padding: .45rem .5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
