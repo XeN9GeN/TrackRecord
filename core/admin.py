@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.utils.translation import gettext_lazy as _
 from simple_history.admin import SimpleHistoryAdmin
 
@@ -14,6 +15,7 @@ from .models import (
     Machine,
     MachineModel,
 )
+from .roles import ENGINEER
 
 admin.site.site_header = _("TrackRecord administration")
 admin.site.site_title = "TrackRecord"
@@ -23,9 +25,44 @@ admin.site.unregister(User)
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    """Keep the audit dates visible but not editable in the admin."""
+    """Let ordinary administrators maintain users without granting privileges."""
 
     readonly_fields = ("last_login", "date_joined")
+
+    def get_readonly_fields(self, request, obj=None):
+        fields = super().get_readonly_fields(request, obj)
+        if request.user.is_superuser:
+            return fields
+        return (*fields, "is_staff", "is_superuser", "user_permissions")
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "groups" and not request.user.is_superuser:
+            kwargs["queryset"] = db_field.remote_field.model.objects.filter(name=ENGINEER)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
+    def has_change_permission(self, request, obj=None):
+        if not super().has_change_permission(request, obj):
+            return False
+        if request.user.is_superuser or obj is None:
+            return True
+        # Password resets and account edits must not grant control of privileged users.
+        return not (
+            obj.is_staff or obj.is_superuser or obj.user_permissions.exists()
+            or obj.groups.exclude(name=ENGINEER).exists()
+        )
+
+
+class StateHistoryAdmin(SimpleHistoryAdmin):
+    """Keep state history inspectable; all state changes require a log entry."""
+
+    def revert_disabled(self, request, obj=None):
+        return True
+
+    def history_form_view(self, request, object_id, version_id, extra_context=None):
+        # Hiding the revert button alone does not prevent a crafted POST.
+        if request.method == "POST":
+            raise PermissionDenied
+        return super().history_form_view(request, object_id, version_id, extra_context)
 
 
 class ContactPersonInline(admin.TabularInline):
@@ -66,7 +103,7 @@ class EquipmentTypeAdmin(SimpleHistoryAdmin):
 
 
 @admin.register(Machine)
-class MachineAdmin(SimpleHistoryAdmin):
+class MachineAdmin(StateHistoryAdmin):
     list_display = ["__str__", "current_owner", "status", "last_contact_at"]
     list_filter = ["status", "model"]
     search_fields = ["factory_number", "model__name", "current_owner__name"]
@@ -81,7 +118,7 @@ class MachineAdmin(SimpleHistoryAdmin):
 
 
 @admin.register(Equipment)
-class EquipmentAdmin(SimpleHistoryAdmin):
+class EquipmentAdmin(StateHistoryAdmin):
     list_display = ["__str__", "production_year", "software_version", "state", "current_machine"]
     list_filter = ["state", "type"]
     search_fields = ["serial_number", "type__name"]
