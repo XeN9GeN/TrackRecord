@@ -175,14 +175,18 @@ def create_log_entry(
 
 
 def can_amend(user, entry):
-    return user.is_superuser or entry.author_id == user.pk
+    return (
+        user.is_active and user.has_perm("core.change_logentry")
+        and (user.is_superuser or entry.author_id == user.pk)
+    )
 
 
 @transaction.atomic
 def amend_log_entry(entry, *, editor, title, text):
     """Change an entry's title and text, keeping the previous version (ADR-0010).
 
-    Only the author (or a superuser) may amend; state-changing fields are never edited.
+    The author needs change_logentry permission; a superuser may amend any entry.
+    State-changing fields are never edited.
     Returns True if anything changed.
     """
     entry = LogEntry.objects.select_for_update().get(pk=entry.pk)

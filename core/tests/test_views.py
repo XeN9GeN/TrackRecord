@@ -146,6 +146,23 @@ def test_counterparty_page_not_found(client_logged_in):
     assert client_logged_in.get(reverse("core:counterparty_detail", args=[999999])).status_code == 404
 
 
+def test_revoked_amendment_permission_hides_link_and_blocks_requests(client_logged_in, engineer, machine):
+    entry = create_log_entry(author=engineer, machine=machine, kind=LogKind.ISSUE, title="Stalls")
+    edit_url = reverse("core:log_entry_amend", args=[entry.pk])
+    detail_url = reverse("core:log_entry_detail", args=[entry.pk])
+    assert edit_url in client_logged_in.get(detail_url).content.decode()
+    engineer.groups.clear()
+    response = client_logged_in.get(detail_url)
+    assert response.status_code == 200
+    assert not response.context["can_amend"]
+    assert edit_url not in response.content.decode()
+    assert client_logged_in.get(edit_url).status_code == 403
+    assert client_logged_in.post(edit_url, {"title": "Changed", "text": "Changed"}).status_code == 403
+    entry.refresh_from_db()
+    assert entry.title == "Stalls"
+    assert not entry.revisions.exists()
+
+
 def test_counterparty_administration_links(client_logged_in, engineer, counterparty):
     engineer.is_staff = True
     engineer.save()
