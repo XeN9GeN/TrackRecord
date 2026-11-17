@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Equipment write-off" %}{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'core:equipment_detail' equipment.pk %}">← {{ equipment }}</a></p>
+<section class="card">
+  <h1>{% translate "Equipment write-off" %}</h1>
+  <p>{{ equipment }}</p>
+  <p class="muted">{% translate "The equipment will be written off. A new log entry will record the reason." %}</p>
+  {% include "core/_form.html" with submit_label=_("Write off equipment") %}
+</section>
+{% endblock %}

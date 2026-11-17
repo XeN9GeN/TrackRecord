@@ -15,10 +15,11 @@ from .forms import (
     AmendLogEntryForm,
     CounterpartyFilterForm,
     EquipmentFilterForm,
+    EquipmentWriteOffForm,
     LogEntryForm,
     MachineFilterForm,
 )
-from .models import ContactPerson, Counterparty, Equipment, IssueStatus, LogEntry, LogKind, Machine
+from .models import ContactPerson, Counterparty, Equipment, EquipmentState, IssueStatus, LogEntry, LogKind, Machine
 from .services import amend_log_entry, can_amend, create_log_entry
 
 
@@ -115,8 +116,30 @@ def equipment_detail(request, pk):
         "page": Paginator(entries, 30).get_page(request.GET.get("page")),
         "kind_filter": [(value, label) for value, label in LogKind.choices if value in present_kinds],
         "selected_kind": kind,
+        "can_write_off": equipment.state in (EquipmentState.IN_STOCK, EquipmentState.REMOVED),
     }
     return render(request, "core/equipment_detail.html", context)
+
+
+@login_required
+@permission_required("core.add_logentry", raise_exception=True)
+def equipment_write_off(request, pk):
+    equipment = get_object_or_404(
+        Equipment.objects.select_related("type").filter(state__in=[EquipmentState.IN_STOCK, EquipmentState.REMOVED]),
+        pk=pk,
+    )
+    form = EquipmentWriteOffForm(request.POST if request.method == "POST" else None)
+    if request.method == "POST" and form.is_valid():
+        try:
+            create_log_entry(
+                author=request.user, equipment=equipment, kind=LogKind.EQUIPMENT_WRITE_OFF, **form.cleaned_data
+            )
+        except ValidationError as error:
+            form.add_error(None, error)
+        else:
+            messages.success(request, _("Entry added."))
+            return redirect("core:equipment_detail", pk=equipment.pk)
+    return render(request, "core/equipment_write_off.html", {"equipment": equipment, "form": form})
 
 
 @login_required

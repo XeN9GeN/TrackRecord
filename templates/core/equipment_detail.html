@@ -8,6 +8,9 @@
 <div class="row">
   <h1>{{ equipment }}</h1>
   <span class="badge {{ equipment.state }}">{{ equipment.get_state_display }}</span>
+  {% if can_write_off and perms.core.add_logentry %}
+    <a class="button" href="{% url 'core:equipment_write_off' equipment.pk %}">{% translate "Write off equipment" %}</a>
+  {% endif %}
 </div>
 
 <div class="grid">

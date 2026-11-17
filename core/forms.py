@@ -219,14 +219,14 @@ class EquipmentFilterForm(DirectoryFilterForm):
         self.fields["q"].widget.attrs["placeholder"] = _("Serial number, type, machine or owner")
 
 
-class LogEntryForm(forms.Form):
-    """New entry form: the set of fields depends on the kind."""
+class LogEntryContentForm(forms.Form):
+    """Common content for machine entries and equipment write-offs."""
 
     event_date = forms.DateField(
-        label=_("Event date"), initial=timezone.localdate, widget=forms.DateInput(attrs={"type": "date"})
+        label=_("Event date"), initial=timezone.localdate,
+        widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
     )
     source = forms.ChoiceField(label=_("Source"), choices=LogSource.choices, initial=LogSource.PHONE)
-    contact = forms.ModelChoiceField(label=_("Who reported it"), queryset=ContactPerson.objects.none(), required=False)
     title = forms.CharField(label=_("Title"), max_length=200)
     text = forms.CharField(
         label=_("Description"),
@@ -235,6 +235,18 @@ class LogEntryForm(forms.Form):
         widget=forms.Textarea,
         help_text=_("Plain text or Markdown: **bold**, lists with “-”, links."),
     )
+
+
+class EquipmentWriteOffForm(LogEntryContentForm):
+    """Write off the unit selected by the equipment page URL."""
+
+    source = forms.ChoiceField(label=_("Source"), choices=LogSource.choices, initial=LogSource.OTHER)
+
+
+class LogEntryForm(LogEntryContentForm):
+    """New entry form: the set of fields depends on the kind."""
+
+    contact = forms.ModelChoiceField(label=_("Who reported it"), queryset=ContactPerson.objects.none(), required=False)
 
     def __init__(self, *args, machine, kind, **kwargs):
         super().__init__(*args, **kwargs)

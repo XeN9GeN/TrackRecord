@@ -1,6 +1,7 @@
 import pytest
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from core.models import Equipment, EquipmentState, EquipmentType, LogKind
@@ -241,3 +242,127 @@ def test_equipment_links_and_administration(client_logged_in, engineer, equipmen
 
 def test_equipment_not_found(client_logged_in):
     assert client_logged_in.get(reverse("core:equipment_detail", args=[999999])).status_code == 404
+
+
+@pytest.mark.parametrize("state", [EquipmentState.IN_STOCK, EquipmentState.REMOVED])
+def test_write_off_form_records_equipment_without_machine(
+    client_logged_in, engineer, equipment, other_equipment, machine, state,
+):
+    if state == EquipmentState.REMOVED:
+        for kind in (LogKind.EQUIPMENT_INSTALL, LogKind.EQUIPMENT_REMOVAL):
+            create_log_entry(author=engineer, machine=machine, kind=kind, title=kind.label, equipment=equipment)
+    url = reverse("core:equipment_write_off", args=[equipment.pk])
+    detail_url = reverse("core:equipment_detail", args=[equipment.pk])
+    assert url in client_logged_in.get(detail_url).content.decode()
+    before_count = equipment.log_entries.count()
+    response = client_logged_in.get(url)
+    assert response.status_code == 200
+    assert equipment.serial_number in response.content.decode()
+    assert 'name="csrfmiddlewaretoken"' in response.content.decode()
+    assert f'value="{timezone.localdate().isoformat()}"' in response.content.decode()
+    assert _("Write off equipment") in response.content.decode()
+    assert equipment.log_entries.count() == before_count
+    equipment.refresh_from_db()
+    assert equipment.state == state
+    response = client_logged_in.post(url, {
+        "event_date": timezone.localdate().isoformat(), "source": "other",
+        "title": "  Failed unit  ", "text": "**Beyond repair**\r\n",
+        "equipment": other_equipment.pk, "machine": machine.pk, "kind": LogKind.EQUIPMENT_INSTALL,
+    })
+    assert response.status_code == 302
+    assert response.url == detail_url
+    equipment.refresh_from_db()
+    other_equipment.refresh_from_db()
+    assert equipment.state == EquipmentState.WRITTEN_OFF
+    assert equipment.current_machine is None
+    assert other_equipment.state == EquipmentState.IN_STOCK
+    assert not other_equipment.log_entries.exists()
+    entry = equipment.log_entries.get(kind=LogKind.EQUIPMENT_WRITE_OFF)
+    assert entry.machine is None
+    assert entry.owner_snapshot is None
+    assert entry.author == engineer
+    assert entry.event_date == timezone.localdate()
+    assert entry.source == "other"
+    assert entry.title == "Failed unit"
+    assert entry.text == "**Beyond repair**"
+    response = client_logged_in.get(detail_url)
+    assert entry in response.context["page"]
+    assert url not in response.content.decode()
+    assert client_logged_in.post(url, {}).status_code == 404
+    assert equipment.log_entries.count() == before_count + 1
+
+
+@pytest.mark.parametrize("method", ["get", "post"])
+def test_write_off_requires_login_and_add_permission(client, equipment, method):
+    url = reverse("core:equipment_write_off", args=[equipment.pk])
+    assert getattr(client, method)(url).status_code == 302
+    user = User.objects.create_user("reader")
+    client.force_login(user)
+    assert getattr(client, method)(url).status_code == 403
+    assert url not in client.get(reverse("core:equipment_detail", args=[equipment.pk])).content.decode()
+    equipment.refresh_from_db()
+    assert equipment.state == EquipmentState.IN_STOCK
+    assert not equipment.log_entries.exists()
+
+
+@pytest.mark.parametrize("data", [
+    {},
+    {"event_date": "2999-01-01", "source": "other", "title": "Failed"},
+    {"event_date": "2026-01-01", "source": "other", "title": "   "},
+    {"event_date": "2026-01-01", "source": "invalid", "title": "Failed"},
+])
+def test_invalid_write_off_does_not_change_equipment(client_logged_in, equipment, data):
+    response = client_logged_in.post(reverse("core:equipment_write_off", args=[equipment.pk]), data)
+    assert response.status_code == 200
+    assert response.context["form"].errors
+    equipment.refresh_from_db()
+    assert equipment.state == EquipmentState.IN_STOCK
+    assert not equipment.log_entries.exists()
+
+
+@pytest.mark.parametrize("state", [EquipmentState.INSTALLED, EquipmentState.WRITTEN_OFF])
+def test_unavailable_equipment_cannot_use_standalone_write_off(
+    client_logged_in, engineer, equipment, machine, state,
+):
+    kind = LogKind.EQUIPMENT_INSTALL if state == EquipmentState.INSTALLED else LogKind.EQUIPMENT_WRITE_OFF
+    create_log_entry(
+        author=engineer, equipment=equipment, kind=kind, title="Previous event",
+        machine=machine if state == EquipmentState.INSTALLED else None,
+    )
+    url = reverse("core:equipment_write_off", args=[equipment.pk])
+    assert url not in client_logged_in.get(reverse("core:equipment_detail", args=[equipment.pk])).content.decode()
+    assert client_logged_in.get(url).status_code == 404
+    assert client_logged_in.post(url, {
+        "event_date": timezone.localdate().isoformat(), "source": "other", "title": "Failed",
+    }).status_code == 404
+    equipment.refresh_from_db()
+    assert equipment.state == state
+    assert equipment.log_entries.count() == 1
+
+
+def test_write_off_handles_installation_between_form_validation_and_save(
+    client_logged_in, engineer, equipment, machine, monkeypatch,
+):
+    def install_then_write_off(**kwargs):
+        create_log_entry(
+            author=engineer, machine=machine, equipment=equipment,
+            kind=LogKind.EQUIPMENT_INSTALL, title="Installed concurrently",
+        )
+        return create_log_entry(**kwargs)
+
+    monkeypatch.setattr("core.views.create_log_entry", install_then_write_off)
+    response = client_logged_in.post(reverse("core:equipment_write_off", args=[equipment.pk]), {
+        "event_date": timezone.localdate().isoformat(), "source": "other", "title": "Failed",
+    })
+    assert response.status_code == 200
+    assert response.context["form"].non_field_errors()
+    equipment.refresh_from_db()
+    assert equipment.state == EquipmentState.INSTALLED
+    assert equipment.current_machine_id == machine.pk
+    assert not equipment.log_entries.filter(kind=LogKind.EQUIPMENT_WRITE_OFF).exists()
+
+
+def test_missing_equipment_write_off_returns_not_found(client_logged_in):
+    url = reverse("core:equipment_write_off", args=[999999])
+    assert client_logged_in.get(url).status_code == 404
+    assert client_logged_in.post(url, {}).status_code == 404
