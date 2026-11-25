@@ -45,6 +45,14 @@ For a demo database, use the management command instead:
 docker compose exec web python manage.py seed_demo --password 'change-this-demo-password'
 ```
 
+To add the extended dataset to a demo database, run the command with an existing account that
+can add log entries. The extended dataset uses `DEMO-` factory and serial numbers and can be
+loaded once per database. Repeating the command skips a batch that is already present.
+
+```bash
+docker compose exec web python manage.py seed_demo --append --author ivanov
+```
+
 ## HTTPS
 
 The included nginx container listens on port 80. Put it behind the company's TLS terminator or

@@ -1,0 +1,710 @@
+{
+  "counterparties": [
+    {
+      "name": "ООО «Учебный полигон — Обь»",
+      "inn": "0000000001",
+      "region": "Новосибирская область",
+      "contacts": [
+        {"full_name": "Яковлев Артём Сергеевич", "position": "главный механик", "email": "mechanic@ob.example"},
+        {"full_name": "Миронова Вера Павловна", "position": "диспетчер", "email": "dispatch@ob.example"}
+      ]
+    },
+    {
+      "name": "АО «Учебный полигон — Ангара»",
+      "inn": "0000000002",
+      "region": "Иркутская область",
+      "contacts": [
+        {"full_name": "Белов Илья Викторович", "position": "главный механик", "email": "mechanic@angara.example"},
+        {"full_name": "Крылова Анна Олеговна", "position": "диспетчер", "email": "dispatch@angara.example"}
+      ]
+    },
+    {
+      "name": "ООО «Учебный полигон — Енисей»",
+      "inn": "0000000003",
+      "region": "Красноярский край",
+      "contacts": [
+        {"full_name": "Сафонов Денис Игоревич", "position": "главный механик", "email": "mechanic@yenisei.example"},
+        {"full_name": "Лебедева Ольга Романовна", "position": "диспетчер", "email": "dispatch@yenisei.example"}
+      ]
+    },
+    {
+      "name": "ООО «Учебный полигон — Амур»",
+      "inn": "0000000004",
+      "region": "Амурская область",
+      "contacts": [
+        {"full_name": "Громов Никита Алексеевич", "position": "главный механик", "email": "mechanic@amur.example"},
+        {"full_name": "Орлова Ирина Сергеевна", "position": "диспетчер", "email": "dispatch@amur.example"}
+      ]
+    },
+    {
+      "name": "АО «Учебный полигон — Урал»",
+      "inn": "0000000005",
+      "region": "Свердловская область",
+      "contacts": [
+        {"full_name": "Соловьёв Павел Андреевич", "position": "главный механик", "email": "mechanic@ural.example"},
+        {"full_name": "Никитина Елена Игоревна", "position": "диспетчер", "email": "dispatch@ural.example"}
+      ]
+    },
+    {
+      "name": "ТОО «Учебный полигон — Иртыш»",
+      "inn": "0000000006",
+      "region": "Павлодарская область",
+      "contacts": [
+        {"full_name": "Садыков Алан Ерланович", "position": "главный механик", "email": "mechanic@irtysh.example"},
+        {"full_name": "Иванова Лидия Викторовна", "position": "диспетчер", "email": "dispatch@irtysh.example"}
+      ]
+    },
+    {
+      "name": "ТОО «Учебный полигон — Сарыарка»",
+      "inn": "0000000007",
+      "region": "Карагандинская область",
+      "contacts": [
+        {"full_name": "Абдрахманов Ержан Муратович", "position": "главный механик", "email": "mechanic@saryarka.example"},
+        {"full_name": "Фёдорова Наталья Петровна", "position": "диспетчер", "email": "dispatch@saryarka.example"}
+      ]
+    },
+    {
+      "name": "ООО «Учебный полигон — Алтай»",
+      "inn": "0000000008",
+      "region": "Алтайский край",
+      "contacts": [
+        {"full_name": "Зорин Максим Глебович", "position": "главный механик", "email": "mechanic@altai.example"},
+        {"full_name": "Козлова Полина Денисовна", "position": "диспетчер", "email": "dispatch@altai.example"}
+      ]
+    }
+  ],
+  "machine_models": [
+    {"name": "Duomatic 09-32 CSM", "manufacturer": "Plasser & Theurer"},
+    {"name": "ВПР-02М", "manufacturer": "Ремпутьмаш"},
+    {"name": "Unimat 08-275", "manufacturer": "Plasser & Theurer"},
+    {"name": "Duomatic 08-32", "manufacturer": "Plasser & Theurer"},
+    {"name": "Dynamic Stopfexpress 09-3X", "manufacturer": "Plasser & Theurer"},
+    {"name": "ВПРС-02", "manufacturer": "Ремпутьмаш"}
+  ],
+  "equipment": [
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-001", "production_year": 2022},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-001", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-002", "production_year": 2023},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-002", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-003", "production_year": 2024},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-003", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-004", "production_year": 2021},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-004", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-005", "production_year": 2022},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-005", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-006", "production_year": 2023},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-006", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-007", "production_year": 2024},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-007", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-008", "production_year": 2021},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-008", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-009", "production_year": 2022},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-009", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-010", "production_year": 2023},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-010", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-011", "production_year": 2024},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-011", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-012", "production_year": 2021},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-012", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-013", "production_year": 2022},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-013", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-014", "production_year": 2023},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-014", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-015", "production_year": 2024},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-015", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-016", "production_year": 2021},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-016", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-017", "production_year": 2022},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-017", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-018", "production_year": 2023},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-018", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-019", "production_year": 2024},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-019", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-020", "production_year": 2021},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-020", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-021", "production_year": 2022},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-021", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-022", "production_year": 2023},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-022", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-023", "production_year": 2024},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-023", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-024", "production_year": 2021},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-024", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-025", "production_year": 2022},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-025", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-026", "production_year": 2023},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-026", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-027", "production_year": 2024},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-027", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-028", "production_year": 2021},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-028", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-029", "production_year": 2022},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-029", "production_year": 2024},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-030", "production_year": 2023},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-030", "production_year": 2022},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-031", "production_year": 2024},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-031", "production_year": 2023},
+    {"type": "Контроллер управления", "serial_number": "DEMO-CU-032", "production_year": 2021},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-032", "production_year": 2024},
+    {"type": "Датчик положения", "serial_number": "DEMO-PS-101", "production_year": 2024},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-102", "production_year": 2024},
+    {"type": "Модуль GNSS", "serial_number": "DEMO-GN-103", "production_year": 2024},
+    {"type": "Блок питания", "serial_number": "DEMO-BP-104", "production_year": 2024},
+    {"type": "Дисплей оператора", "serial_number": "DEMO-OD-120", "production_year": 2020}
+  ],
+  "written_off_from_stock": [
+    {"serial_number": "DEMO-OD-120", "days_ago": 16, "author": "demo", "title": "Учебный дисплей списан со склада", "text": "Дисплей не прошёл проверку матрицы при инвентаризации."}
+  ],
+  "machines": [
+    {
+      "model": "Duomatic 09-32 CSM",
+      "factory_number": "DEMO-001",
+      "history": [
+        {"days_ago": 397, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 395, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Обь»"},
+        {"days_ago": 388, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 383, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-001", "software_version": "2.2.0"},
+        {"days_ago": 382, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: датчик положения", "equipment": "DEMO-PS-001"},
+        {"days_ago": 181, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Миронова Вера Павловна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 121, "kind": "issue", "author": "demo", "source": "phone", "title": "Нестабильное показание датчика положения", "ref": "primary", "contact": "Яковлев Артём Сергеевич", "text": "**Симптомы:** После прогрева показания меняются на 2–4 мм при неподвижной раме."},
+        {"days_ago": 101, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили крепление датчика и повторили калибровку. На контрольном участке показания стабильны."},
+        {"days_ago": 88, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 9", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 87, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 9", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 86, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 9", "text": "Результаты замеров переданы механику полигона."},
+        {"days_ago": 81, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-001", "software_version": "2.2.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 81, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 8", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 80, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 8", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 79, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 8", "text": "Результаты замеров переданы механику полигона."},
+        {"days_ago": 74, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 7", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 73, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 7", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 72, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 7", "text": "Результаты замеров переданы механику полигона."},
+        {"days_ago": 67, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 6", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 66, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 6", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 65, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 6", "text": "Результаты замеров переданы механику полигона."},
+        {"days_ago": 60, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 5", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 59, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 5", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 58, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 5", "text": "Результаты замеров переданы механику полигона."},
+        {"days_ago": 53, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 4", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 52, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 4", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 51, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 4", "text": "Результаты замеров переданы механику полигона."},
+        {"days_ago": 46, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 3", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 45, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 3", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 44, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 3", "text": "Результаты замеров переданы механику полигона."},
+        {"days_ago": 39, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 2", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 38, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 2", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 37, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 2", "text": "Результаты замеров переданы механику полигона."},
+        {"days_ago": 32, "kind": "request", "author": "demo", "source": "phone", "title": "Согласовано еженедельное окно, неделя 1", "contact": "Миронова Вера Павловна", "text": "Диспетчер подтвердил время доступа к машине."},
+        {"days_ago": 31, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Еженедельная проверка, неделя 1", "text": "Проверены крепления оборудования и показания датчика положения."},
+        {"days_ago": 30, "kind": "document", "author": "demo", "source": "email", "title": "Внесены результаты проверки, неделя 1", "text": "Результаты замеров переданы механику полигона."}
+      ]
+    },
+    {
+      "model": "ВПР-02М",
+      "factory_number": "DEMO-002",
+      "history": [
+        {"days_ago": 404, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 402, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "АО «Учебный полигон — Ангара»"},
+        {"days_ago": 395, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 390, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-002", "software_version": "2.3.0"},
+        {"days_ago": 389, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: датчик положения", "equipment": "DEMO-PS-002"},
+        {"days_ago": 182, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Крылова Анна Олеговна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 122, "kind": "issue", "author": "demo", "source": "email", "title": "Нестабильное показание датчика положения", "ref": "primary", "contact": "Белов Илья Викторович", "text": "**Симптомы:** После прогрева показания меняются на 2–4 мм при неподвижной раме."},
+        {"days_ago": 102, "kind": "maintenance", "author": "demo", "source": "remote", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили крепление датчика и повторили калибровку. На контрольном участке показания стабильны."},
+        {"days_ago": 82, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-002", "software_version": "2.3.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 32, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 2, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Крылова Анна Олеговна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Unimat 08-275",
+      "factory_number": "DEMO-003",
+      "history": [
+        {"days_ago": 411, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 409, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Енисей»"},
+        {"days_ago": 402, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 397, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-003", "software_version": "2.4.0"},
+        {"days_ago": 396, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: дисплей оператора", "equipment": "DEMO-OD-003"},
+        {"days_ago": 183, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Лебедева Ольга Романовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 123, "kind": "issue", "author": "demo", "source": "messenger", "title": "Дисплей гаснет при запуске", "ref": "primary", "contact": "Сафонов Денис Игоревич", "text": "**Симптомы:** При подаче питания экран на несколько секунд гаснет. После повторного запуска меню открывается."},
+        {"days_ago": 103, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Заменили разъём питания дисплея и проверили пять холодных запусков."},
+        {"days_ago": 3, "kind": "request", "author": "demo", "source": "phone", "title": "Уточнён график работ на полигоне", "contact": "Лебедева Ольга Романовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Duomatic 08-32",
+      "factory_number": "DEMO-004",
+      "history": [
+        {"days_ago": 418, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 416, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Амур»"},
+        {"days_ago": 409, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 404, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-004", "software_version": "2.1.0"},
+        {"days_ago": 403, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: дисплей оператора", "equipment": "DEMO-OD-004"},
+        {"days_ago": 184, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Орлова Ирина Сергеевна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 124, "kind": "issue", "author": "demo", "source": "phone", "title": "Дисплей гаснет при запуске", "ref": "primary", "contact": "Громов Никита Алексеевич", "text": "**Симптомы:** При подаче питания экран на несколько секунд гаснет. После повторного запуска меню открывается."},
+        {"days_ago": 84, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-004", "software_version": "2.1.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 34, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 4, "kind": "request", "author": "demo", "source": "messenger", "title": "Уточнён график работ на полигоне", "contact": "Орлова Ирина Сергеевна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Dynamic Stopfexpress 09-3X",
+      "factory_number": "DEMO-005",
+      "history": [
+        {"days_ago": 425, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 423, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "АО «Учебный полигон — Урал»"},
+        {"days_ago": 416, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 411, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-005", "software_version": "2.2.0"},
+        {"days_ago": 410, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: модуль GNSS", "equipment": "DEMO-GN-005"},
+        {"days_ago": 185, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Никитина Елена Игоревна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 125, "kind": "issue", "author": "demo", "source": "email", "title": "Потеря координат на контрольном участке", "ref": "primary", "contact": "Соловьёв Павел Андреевич", "text": "**Симптомы:** На открытом участке пропадает фиксация GNSS. Повторный поиск занимает около минуты."},
+        {"days_ago": 105, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Осмотрели антенну и заменили повреждённый кабель. Координаты проверены на двух контрольных точках."},
+        {"days_ago": 85, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-005", "software_version": "2.2.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 42, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина поставлена на ремонт", "new_status": "under_repair", "text": "Отдельно запланирована проверка контура питания."},
+        {"days_ago": 5, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Никитина Елена Игоревна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "ВПРС-02",
+      "factory_number": "DEMO-006",
+      "history": [
+        {"days_ago": 432, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 430, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ТОО «Учебный полигон — Иртыш»"},
+        {"days_ago": 423, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 418, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-006", "software_version": "2.3.0"},
+        {"days_ago": 417, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: модуль GNSS", "equipment": "DEMO-GN-006"},
+        {"days_ago": 186, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Иванова Лидия Викторовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 126, "kind": "issue", "author": "demo", "source": "messenger", "title": "Потеря координат на контрольном участке", "ref": "primary", "contact": "Садыков Алан Ерланович", "text": "**Симптомы:** На открытом участке пропадает фиксация GNSS. Повторный поиск занимает около минуты."},
+        {"days_ago": 106, "kind": "maintenance", "author": "demo", "source": "remote", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Осмотрели антенну и заменили повреждённый кабель. Координаты проверены на двух контрольных точках."},
+        {"days_ago": 36, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."}
+      ]
+    },
+    {
+      "model": "Duomatic 09-32 CSM",
+      "factory_number": "DEMO-007",
+      "history": [
+        {"days_ago": 439, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 437, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ТОО «Учебный полигон — Сарыарка»"},
+        {"days_ago": 430, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 425, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-007", "software_version": "2.4.0"},
+        {"days_ago": 424, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: блок питания", "equipment": "DEMO-BP-007"},
+        {"days_ago": 187, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Фёдорова Наталья Петровна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 127, "kind": "issue", "author": "demo", "source": "phone", "title": "Система перезапускается под нагрузкой", "ref": "primary", "contact": "Абдрахманов Ержан Муратович", "text": "**Симптомы:** В течение смены зарегистрированы два перезапуска. В журнале питания после остановки ошибок нет."},
+        {"days_ago": 107, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили цепь питания под нагрузкой, закрепили клеммы и провели контрольный прогон."},
+        {"days_ago": 87, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-007", "software_version": "2.4.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 59, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Машина передана соседнему полигону", "new_owner": "ООО «Учебный полигон — Алтай»", "text": "Оборудование передано вместе с машиной по описи."},
+        {"days_ago": 7, "kind": "request", "author": "demo", "source": "messenger", "title": "Уточнён график работ на полигоне", "contact": "Козлова Полина Денисовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "ВПР-02М",
+      "factory_number": "DEMO-008",
+      "history": [
+        {"days_ago": 446, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 444, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Алтай»"},
+        {"days_ago": 437, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 432, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-008", "software_version": "2.1.0"},
+        {"days_ago": 431, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: блок питания", "equipment": "DEMO-BP-008"},
+        {"days_ago": 188, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Козлова Полина Денисовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 128, "kind": "issue", "author": "demo", "source": "email", "title": "Система перезапускается под нагрузкой", "ref": "primary", "contact": "Зорин Максим Глебович", "text": "**Симптомы:** В течение смены зарегистрированы два перезапуска. В журнале питания после остановки ошибок нет."},
+        {"days_ago": 88, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-008", "software_version": "2.1.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 38, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 8, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Козлова Полина Денисовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Unimat 08-275",
+      "factory_number": "DEMO-009",
+      "history": [
+        {"days_ago": 453, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 451, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Обь»"},
+        {"days_ago": 444, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 439, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-009", "software_version": "2.2.0"},
+        {"days_ago": 438, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: датчик положения", "equipment": "DEMO-PS-009"},
+        {"days_ago": 189, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Миронова Вера Павловна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 129, "kind": "issue", "author": "demo", "source": "messenger", "title": "Нестабильное показание датчика положения", "ref": "primary", "contact": "Яковлев Артём Сергеевич", "text": "**Симптомы:** После прогрева показания меняются на 2–4 мм при неподвижной раме."},
+        {"days_ago": 109, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили крепление датчика и повторили калибровку. На контрольном участке показания стабильны."},
+        {"days_ago": 9, "kind": "request", "author": "demo", "source": "phone", "title": "Уточнён график работ на полигоне", "contact": "Миронова Вера Павловна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Duomatic 08-32",
+      "factory_number": "DEMO-010",
+      "history": [
+        {"days_ago": 460, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 458, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "АО «Учебный полигон — Ангара»"},
+        {"days_ago": 451, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 446, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-010", "software_version": "2.3.0"},
+        {"days_ago": 445, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: датчик положения", "equipment": "DEMO-PS-010"},
+        {"days_ago": 190, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Крылова Анна Олеговна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 130, "kind": "issue", "author": "demo", "source": "phone", "title": "Нестабильное показание датчика положения", "ref": "primary", "contact": "Белов Илья Викторович", "text": "**Симптомы:** После прогрева показания меняются на 2–4 мм при неподвижной раме."},
+        {"days_ago": 110, "kind": "maintenance", "author": "demo", "source": "remote", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили крепление датчика и повторили калибровку. На контрольном участке показания стабильны."},
+        {"days_ago": 90, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-010", "software_version": "2.3.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 47, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина поставлена на ремонт", "new_status": "under_repair", "text": "Отдельно запланирована проверка контура питания."},
+        {"days_ago": 40, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 10, "kind": "request", "author": "demo", "source": "messenger", "title": "Уточнён график работ на полигоне", "contact": "Крылова Анна Олеговна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Dynamic Stopfexpress 09-3X",
+      "factory_number": "DEMO-011",
+      "history": [
+        {"days_ago": 467, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 465, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Енисей»"},
+        {"days_ago": 458, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 453, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-011", "software_version": "2.4.0"},
+        {"days_ago": 452, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: дисплей оператора", "equipment": "DEMO-OD-011"},
+        {"days_ago": 191, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Лебедева Ольга Романовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 131, "kind": "issue", "author": "demo", "source": "email", "title": "Дисплей гаснет при запуске", "ref": "primary", "contact": "Сафонов Денис Игоревич", "text": "**Симптомы:** При подаче питания экран на несколько секунд гаснет. После повторного запуска меню открывается."},
+        {"days_ago": 111, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Заменили разъём питания дисплея и проверили пять холодных запусков."},
+        {"days_ago": 91, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-011", "software_version": "2.4.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 51, "kind": "equipment_removal", "author": "demo", "source": "site_visit", "title": "Контроллер снят перед продажей", "equipment": "DEMO-CU-011"},
+        {"days_ago": 50, "kind": "status_change", "author": "demo", "source": "email", "title": "Продажа машины подтверждена", "new_status": "sold"}
+      ]
+    },
+    {
+      "model": "ВПРС-02",
+      "factory_number": "DEMO-012",
+      "history": [
+        {"days_ago": 474, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 472, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Амур»"},
+        {"days_ago": 465, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 460, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-012", "software_version": "2.1.0"},
+        {"days_ago": 459, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: дисплей оператора", "equipment": "DEMO-OD-012"},
+        {"days_ago": 192, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Орлова Ирина Сергеевна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 132, "kind": "issue", "author": "demo", "source": "messenger", "title": "Дисплей гаснет при запуске", "ref": "primary", "contact": "Громов Никита Алексеевич", "text": "**Симптомы:** При подаче питания экран на несколько секунд гаснет. После повторного запуска меню открывается."},
+        {"days_ago": 42, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 12, "kind": "request", "author": "demo", "source": "phone", "title": "Уточнён график работ на полигоне", "contact": "Орлова Ирина Сергеевна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Duomatic 09-32 CSM",
+      "factory_number": "DEMO-013",
+      "history": [
+        {"days_ago": 481, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 479, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "АО «Учебный полигон — Урал»"},
+        {"days_ago": 472, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 467, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-013", "software_version": "2.2.0"},
+        {"days_ago": 466, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: модуль GNSS", "equipment": "DEMO-GN-013"},
+        {"days_ago": 193, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Никитина Елена Игоревна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 133, "kind": "issue", "author": "demo", "source": "phone", "title": "Потеря координат на контрольном участке", "ref": "primary", "contact": "Соловьёв Павел Андреевич", "text": "**Симптомы:** На открытом участке пропадает фиксация GNSS. Повторный поиск занимает около минуты."},
+        {"days_ago": 113, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Осмотрели антенну и заменили повреждённый кабель. Координаты проверены на двух контрольных точках."},
+        {"days_ago": 93, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-013", "software_version": "2.2.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 52, "kind": "equipment_write_off", "author": "demo", "source": "site_visit", "title": "Изношенный модуль списан с машины", "equipment": "DEMO-GN-013"},
+        {"days_ago": 51, "kind": "status_change", "author": "demo", "source": "email", "title": "Машина выведена из эксплуатации", "new_status": "decommissioned"},
+        {"days_ago": 13, "kind": "request", "author": "demo", "source": "messenger", "title": "Уточнён график работ на полигоне", "contact": "Никитина Елена Игоревна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "ВПР-02М",
+      "factory_number": "DEMO-014",
+      "history": [
+        {"days_ago": 488, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 486, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ТОО «Учебный полигон — Иртыш»"},
+        {"days_ago": 479, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 474, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-014", "software_version": "2.3.0"},
+        {"days_ago": 473, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: модуль GNSS", "equipment": "DEMO-GN-014"},
+        {"days_ago": 194, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Иванова Лидия Викторовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 134, "kind": "issue", "author": "demo", "source": "email", "title": "Потеря координат на контрольном участке", "ref": "primary", "contact": "Садыков Алан Ерланович", "text": "**Симптомы:** На открытом участке пропадает фиксация GNSS. Повторный поиск занимает около минуты."},
+        {"days_ago": 114, "kind": "maintenance", "author": "demo", "source": "remote", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Осмотрели антенну и заменили повреждённый кабель. Координаты проверены на двух контрольных точках."},
+        {"days_ago": 94, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-014", "software_version": "2.3.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 66, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Машина передана соседнему полигону", "new_owner": "ТОО «Учебный полигон — Сарыарка»", "text": "Оборудование передано вместе с машиной по описи."},
+        {"days_ago": 44, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 14, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Фёдорова Наталья Петровна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Unimat 08-275",
+      "factory_number": "DEMO-015",
+      "history": [
+        {"days_ago": 495, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 493, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ТОО «Учебный полигон — Сарыарка»"},
+        {"days_ago": 486, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 481, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-015", "software_version": "2.4.0"},
+        {"days_ago": 480, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: блок питания", "equipment": "DEMO-BP-015"},
+        {"days_ago": 195, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Фёдорова Наталья Петровна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 135, "kind": "issue", "author": "demo", "source": "messenger", "title": "Система перезапускается под нагрузкой", "ref": "primary", "contact": "Абдрахманов Ержан Муратович", "text": "**Симптомы:** В течение смены зарегистрированы два перезапуска. В журнале питания после остановки ошибок нет."},
+        {"days_ago": 115, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили цепь питания под нагрузкой, закрепили клеммы и провели контрольный прогон."},
+        {"days_ago": 52, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина поставлена на ремонт", "new_status": "under_repair", "text": "Отдельно запланирована проверка контура питания."},
+        {"days_ago": 15, "kind": "request", "author": "demo", "source": "phone", "title": "Уточнён график работ на полигоне", "contact": "Фёдорова Наталья Петровна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Duomatic 08-32",
+      "factory_number": "DEMO-016",
+      "history": [
+        {"days_ago": 502, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 500, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Алтай»"},
+        {"days_ago": 493, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 488, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-016", "software_version": "2.1.0"},
+        {"days_ago": 487, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: блок питания", "equipment": "DEMO-BP-016"},
+        {"days_ago": 196, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Козлова Полина Денисовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 136, "kind": "issue", "author": "demo", "source": "phone", "title": "Система перезапускается под нагрузкой", "ref": "primary", "contact": "Зорин Максим Глебович", "text": "**Симптомы:** В течение смены зарегистрированы два перезапуска. В журнале питания после остановки ошибок нет."},
+        {"days_ago": 96, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-016", "software_version": "2.1.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 46, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."}
+      ]
+    },
+    {
+      "model": "Dynamic Stopfexpress 09-3X",
+      "factory_number": "DEMO-017",
+      "history": [
+        {"days_ago": 509, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 507, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Обь»"},
+        {"days_ago": 500, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 495, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-017", "software_version": "2.2.0"},
+        {"days_ago": 494, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: датчик положения", "equipment": "DEMO-PS-017"},
+        {"days_ago": 197, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Миронова Вера Павловна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 137, "kind": "issue", "author": "demo", "source": "email", "title": "Нестабильное показание датчика положения", "ref": "primary", "contact": "Яковлев Артём Сергеевич", "text": "**Симптомы:** После прогрева показания меняются на 2–4 мм при неподвижной раме."},
+        {"days_ago": 117, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили крепление датчика и повторили калибровку. На контрольном участке показания стабильны."},
+        {"days_ago": 97, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-017", "software_version": "2.2.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 17, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Миронова Вера Павловна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "ВПРС-02",
+      "factory_number": "DEMO-018",
+      "history": [
+        {"days_ago": 516, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 514, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "АО «Учебный полигон — Ангара»"},
+        {"days_ago": 507, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 502, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-018", "software_version": "2.3.0"},
+        {"days_ago": 501, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: датчик положения", "equipment": "DEMO-PS-018"},
+        {"days_ago": 198, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Крылова Анна Олеговна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 138, "kind": "issue", "author": "demo", "source": "messenger", "title": "Нестабильное показание датчика положения", "ref": "primary", "contact": "Белов Илья Викторович", "text": "**Симптомы:** После прогрева показания меняются на 2–4 мм при неподвижной раме."},
+        {"days_ago": 118, "kind": "maintenance", "author": "demo", "source": "remote", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили крепление датчика и повторили калибровку. На контрольном участке показания стабильны."},
+        {"days_ago": 48, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 18, "kind": "request", "author": "demo", "source": "phone", "title": "Уточнён график работ на полигоне", "contact": "Крылова Анна Олеговна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Duomatic 09-32 CSM",
+      "factory_number": "DEMO-019",
+      "history": [
+        {"days_ago": 523, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 521, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Енисей»"},
+        {"days_ago": 514, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 509, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-019", "software_version": "2.4.0"},
+        {"days_ago": 508, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: дисплей оператора", "equipment": "DEMO-OD-019"},
+        {"days_ago": 199, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Лебедева Ольга Романовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 139, "kind": "issue", "author": "demo", "source": "phone", "title": "Дисплей гаснет при запуске", "ref": "primary", "contact": "Сафонов Денис Игоревич", "text": "**Симптомы:** При подаче питания экран на несколько секунд гаснет. После повторного запуска меню открывается."},
+        {"days_ago": 119, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Заменили разъём питания дисплея и проверили пять холодных запусков."},
+        {"days_ago": 99, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-019", "software_version": "2.4.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 19, "kind": "request", "author": "demo", "source": "messenger", "title": "Уточнён график работ на полигоне", "contact": "Лебедева Ольга Романовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "ВПР-02М",
+      "factory_number": "DEMO-020",
+      "history": [
+        {"days_ago": 530, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 528, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Амур»"},
+        {"days_ago": 521, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 516, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-020", "software_version": "2.1.0"},
+        {"days_ago": 515, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: дисплей оператора", "equipment": "DEMO-OD-020"},
+        {"days_ago": 200, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Орлова Ирина Сергеевна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 140, "kind": "issue", "author": "demo", "source": "email", "title": "Дисплей гаснет при запуске", "ref": "primary", "contact": "Громов Никита Алексеевич", "text": "**Симптомы:** При подаче питания экран на несколько секунд гаснет. После повторного запуска меню открывается."},
+        {"days_ago": 100, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-020", "software_version": "2.1.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 57, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина поставлена на ремонт", "new_status": "under_repair", "text": "Отдельно запланирована проверка контура питания."},
+        {"days_ago": 50, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 20, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Орлова Ирина Сергеевна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Unimat 08-275",
+      "factory_number": "DEMO-021",
+      "history": [
+        {"days_ago": 537, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 535, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "АО «Учебный полигон — Урал»"},
+        {"days_ago": 528, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 523, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-021", "software_version": "2.2.0"},
+        {"days_ago": 522, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: модуль GNSS", "equipment": "DEMO-GN-021"},
+        {"days_ago": 201, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Никитина Елена Игоревна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 141, "kind": "issue", "author": "demo", "source": "messenger", "title": "Потеря координат на контрольном участке", "ref": "primary", "contact": "Соловьёв Павел Андреевич", "text": "**Симптомы:** На открытом участке пропадает фиксация GNSS. Повторный поиск занимает около минуты."},
+        {"days_ago": 121, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Осмотрели антенну и заменили повреждённый кабель. Координаты проверены на двух контрольных точках."},
+        {"days_ago": 73, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Машина передана соседнему полигону", "new_owner": "ТОО «Учебный полигон — Иртыш»", "text": "Оборудование передано вместе с машиной по описи."}
+      ]
+    },
+    {
+      "model": "Duomatic 08-32",
+      "factory_number": "DEMO-022",
+      "history": [
+        {"days_ago": 544, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 542, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ТОО «Учебный полигон — Иртыш»"},
+        {"days_ago": 535, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 530, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-022", "software_version": "2.3.0"},
+        {"days_ago": 529, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: модуль GNSS", "equipment": "DEMO-GN-022"},
+        {"days_ago": 202, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Иванова Лидия Викторовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 142, "kind": "issue", "author": "demo", "source": "phone", "title": "Потеря координат на контрольном участке", "ref": "primary", "contact": "Садыков Алан Ерланович", "text": "**Симптомы:** На открытом участке пропадает фиксация GNSS. Повторный поиск занимает около минуты."},
+        {"days_ago": 122, "kind": "maintenance", "author": "demo", "source": "remote", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Осмотрели антенну и заменили повреждённый кабель. Координаты проверены на двух контрольных точках."},
+        {"days_ago": 102, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-022", "software_version": "2.3.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 62, "kind": "equipment_removal", "author": "demo", "source": "site_visit", "title": "Контроллер снят перед продажей", "equipment": "DEMO-CU-022"},
+        {"days_ago": 61, "kind": "status_change", "author": "demo", "source": "email", "title": "Продажа машины подтверждена", "new_status": "sold"},
+        {"days_ago": 52, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 22, "kind": "request", "author": "demo", "source": "messenger", "title": "Уточнён график работ на полигоне", "contact": "Иванова Лидия Викторовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Dynamic Stopfexpress 09-3X",
+      "factory_number": "DEMO-023",
+      "history": [
+        {"days_ago": 551, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 549, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ТОО «Учебный полигон — Сарыарка»"},
+        {"days_ago": 542, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 537, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-023", "software_version": "2.4.0"},
+        {"days_ago": 536, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: блок питания", "equipment": "DEMO-BP-023"},
+        {"days_ago": 203, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Фёдорова Наталья Петровна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 143, "kind": "issue", "author": "demo", "source": "email", "title": "Система перезапускается под нагрузкой", "ref": "primary", "contact": "Абдрахманов Ержан Муратович", "text": "**Симптомы:** В течение смены зарегистрированы два перезапуска. В журнале питания после остановки ошибок нет."},
+        {"days_ago": 123, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили цепь питания под нагрузкой, закрепили клеммы и провели контрольный прогон."},
+        {"days_ago": 103, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-023", "software_version": "2.4.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 23, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Фёдорова Наталья Петровна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "ВПРС-02",
+      "factory_number": "DEMO-024",
+      "history": [
+        {"days_ago": 558, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 556, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Алтай»"},
+        {"days_ago": 549, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 544, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-024", "software_version": "2.1.0"},
+        {"days_ago": 543, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: блок питания", "equipment": "DEMO-BP-024"},
+        {"days_ago": 204, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Козлова Полина Денисовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 144, "kind": "issue", "author": "demo", "source": "messenger", "title": "Система перезапускается под нагрузкой", "ref": "primary", "contact": "Зорин Максим Глебович", "text": "**Симптомы:** В течение смены зарегистрированы два перезапуска. В журнале питания после остановки ошибок нет."},
+        {"days_ago": 54, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 24, "kind": "request", "author": "demo", "source": "phone", "title": "Уточнён график работ на полигоне", "contact": "Козлова Полина Денисовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Duomatic 09-32 CSM",
+      "factory_number": "DEMO-025",
+      "history": [
+        {"days_ago": 565, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 563, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Обь»"},
+        {"days_ago": 556, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 551, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-025", "software_version": "2.2.0"},
+        {"days_ago": 550, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: датчик положения", "equipment": "DEMO-PS-025"},
+        {"days_ago": 205, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Миронова Вера Павловна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 145, "kind": "issue", "author": "demo", "source": "phone", "title": "Нестабильное показание датчика положения", "ref": "primary", "contact": "Яковлев Артём Сергеевич", "text": "**Симптомы:** После прогрева показания меняются на 2–4 мм при неподвижной раме."},
+        {"days_ago": 125, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили крепление датчика и повторили калибровку. На контрольном участке показания стабильны."},
+        {"days_ago": 105, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-025", "software_version": "2.2.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 62, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина поставлена на ремонт", "new_status": "under_repair", "text": "Отдельно запланирована проверка контура питания."},
+        {"days_ago": 25, "kind": "request", "author": "demo", "source": "messenger", "title": "Уточнён график работ на полигоне", "contact": "Миронова Вера Павловна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "ВПР-02М",
+      "factory_number": "DEMO-026",
+      "history": [
+        {"days_ago": 572, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 570, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "АО «Учебный полигон — Ангара»"},
+        {"days_ago": 563, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 558, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-026", "software_version": "2.3.0"},
+        {"days_ago": 557, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: датчик положения", "equipment": "DEMO-PS-026"},
+        {"days_ago": 206, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Крылова Анна Олеговна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 146, "kind": "issue", "author": "demo", "source": "email", "title": "Нестабильное показание датчика положения", "ref": "primary", "contact": "Белов Илья Викторович", "text": "**Симптомы:** После прогрева показания меняются на 2–4 мм при неподвижной раме."},
+        {"days_ago": 126, "kind": "maintenance", "author": "demo", "source": "remote", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили крепление датчика и повторили калибровку. На контрольном участке показания стабильны."},
+        {"days_ago": 106, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-026", "software_version": "2.3.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 65, "kind": "equipment_write_off", "author": "demo", "source": "site_visit", "title": "Изношенный модуль списан с машины", "equipment": "DEMO-PS-026"},
+        {"days_ago": 64, "kind": "status_change", "author": "demo", "source": "email", "title": "Машина выведена из эксплуатации", "new_status": "decommissioned"},
+        {"days_ago": 56, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."}
+      ]
+    },
+    {
+      "model": "Unimat 08-275",
+      "factory_number": "DEMO-027",
+      "history": [
+        {"days_ago": 579, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 577, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Енисей»"},
+        {"days_ago": 570, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 565, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-027", "software_version": "2.4.0"},
+        {"days_ago": 564, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: дисплей оператора", "equipment": "DEMO-OD-027"},
+        {"days_ago": 207, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Лебедева Ольга Романовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 147, "kind": "issue", "author": "demo", "source": "messenger", "title": "Дисплей гаснет при запуске", "ref": "primary", "contact": "Сафонов Денис Игоревич", "text": "**Симптомы:** При подаче питания экран на несколько секунд гаснет. После повторного запуска меню открывается."},
+        {"days_ago": 127, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Заменили разъём питания дисплея и проверили пять холодных запусков."},
+        {"days_ago": 1, "kind": "request", "author": "demo", "source": "phone", "title": "Уточнён график работ на полигоне", "contact": "Лебедева Ольга Романовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Duomatic 08-32",
+      "factory_number": "DEMO-028",
+      "history": [
+        {"days_ago": 586, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 584, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Амур»"},
+        {"days_ago": 577, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 572, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-028", "software_version": "2.1.0"},
+        {"days_ago": 571, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: дисплей оператора", "equipment": "DEMO-OD-028"},
+        {"days_ago": 208, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Орлова Ирина Сергеевна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 148, "kind": "issue", "author": "demo", "source": "phone", "title": "Дисплей гаснет при запуске", "ref": "primary", "contact": "Громов Никита Алексеевич", "text": "**Симптомы:** При подаче питания экран на несколько секунд гаснет. После повторного запуска меню открывается."},
+        {"days_ago": 108, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-028", "software_version": "2.1.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 80, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Машина передана соседнему полигону", "new_owner": "АО «Учебный полигон — Урал»", "text": "Оборудование передано вместе с машиной по описи."},
+        {"days_ago": 58, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 2, "kind": "request", "author": "demo", "source": "messenger", "title": "Уточнён график работ на полигоне", "contact": "Никитина Елена Игоревна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Dynamic Stopfexpress 09-3X",
+      "factory_number": "DEMO-029",
+      "history": [
+        {"days_ago": 593, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 591, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "АО «Учебный полигон — Урал»"},
+        {"days_ago": 584, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 579, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-029", "software_version": "2.2.0"},
+        {"days_ago": 578, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: модуль GNSS", "equipment": "DEMO-GN-029"},
+        {"days_ago": 209, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Никитина Елена Игоревна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 149, "kind": "issue", "author": "demo", "source": "email", "title": "Потеря координат на контрольном участке", "ref": "primary", "contact": "Соловьёв Павел Андреевич", "text": "**Симптомы:** На открытом участке пропадает фиксация GNSS. Повторный поиск занимает около минуты."},
+        {"days_ago": 129, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Осмотрели антенну и заменили повреждённый кабель. Координаты проверены на двух контрольных точках."},
+        {"days_ago": 109, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-029", "software_version": "2.2.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 3, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Никитина Елена Игоревна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "ВПРС-02",
+      "factory_number": "DEMO-030",
+      "history": [
+        {"days_ago": 600, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 598, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ТОО «Учебный полигон — Иртыш»"},
+        {"days_ago": 591, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 586, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-030", "software_version": "2.3.0"},
+        {"days_ago": 585, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: модуль GNSS", "equipment": "DEMO-GN-030"},
+        {"days_ago": 210, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Иванова Лидия Викторовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 150, "kind": "issue", "author": "demo", "source": "messenger", "title": "Потеря координат на контрольном участке", "ref": "primary", "contact": "Садыков Алан Ерланович", "text": "**Симптомы:** На открытом участке пропадает фиксация GNSS. Повторный поиск занимает около минуты."},
+        {"days_ago": 130, "kind": "maintenance", "author": "demo", "source": "remote", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Осмотрели антенну и заменили повреждённый кабель. Координаты проверены на двух контрольных точках."},
+        {"days_ago": 67, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина поставлена на ремонт", "new_status": "under_repair", "text": "Отдельно запланирована проверка контура питания."},
+        {"days_ago": 60, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 4, "kind": "request", "author": "demo", "source": "phone", "title": "Уточнён график работ на полигоне", "contact": "Иванова Лидия Викторовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    },
+    {
+      "model": "Duomatic 09-32 CSM",
+      "factory_number": "DEMO-031",
+      "history": [
+        {"days_ago": 607, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 605, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ТОО «Учебный полигон — Сарыарка»"},
+        {"days_ago": 598, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 593, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-031", "software_version": "2.4.0"},
+        {"days_ago": 592, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: блок питания", "equipment": "DEMO-BP-031"},
+        {"days_ago": 211, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Фёдорова Наталья Петровна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 151, "kind": "issue", "author": "demo", "source": "phone", "title": "Система перезапускается под нагрузкой", "ref": "primary", "contact": "Абдрахманов Ержан Муратович", "text": "**Симптомы:** В течение смены зарегистрированы два перезапуска. В журнале питания после остановки ошибок нет."},
+        {"days_ago": 131, "kind": "maintenance", "author": "demo", "source": "site_visit", "title": "Замечание устранено после диагностики", "resolves": ["primary"], "text": "Проверили цепь питания под нагрузкой, закрепили клеммы и провели контрольный прогон."},
+        {"days_ago": 111, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-031", "software_version": "2.4.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 21, "kind": "equipment_removal", "author": "demo", "source": "site_visit", "title": "Модуль снят для перестановки", "equipment": "DEMO-BP-031", "text": "Модуль проверен на стенде перед передачей."}
+      ]
+    },
+    {
+      "model": "ВПР-02М",
+      "factory_number": "DEMO-032",
+      "history": [
+        {"days_ago": 614, "kind": "initial_import", "author": "demo", "source": "other", "title": "Карточка перенесена из учебного реестра", "text": "Сверены заводской номер и комплектация по ведомости полигона."},
+        {"days_ago": 612, "kind": "ownership_change", "author": "demo", "source": "email", "title": "Владелец указан по акту передачи", "new_owner": "ООО «Учебный полигон — Алтай»"},
+        {"days_ago": 605, "kind": "status_change", "author": "demo", "source": "site_visit", "title": "Машина принята в эксплуатацию", "new_status": "in_service"},
+        {"days_ago": 600, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен контроллер управления", "equipment": "DEMO-CU-032", "software_version": "2.1.0"},
+        {"days_ago": 599, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлено оборудование: блок питания", "equipment": "DEMO-BP-032"},
+        {"days_ago": 212, "kind": "request", "author": "demo", "source": "phone", "title": "Согласован выезд на плановое обслуживание", "contact": "Козлова Полина Денисовна", "text": "Бригада освободит машину после дневной смены. Доступ к кабине подтверждён."},
+        {"days_ago": 152, "kind": "issue", "author": "demo", "source": "email", "title": "Система перезапускается под нагрузкой", "ref": "primary", "contact": "Зорин Максим Глебович", "text": "**Симптомы:** В течение смены зарегистрированы два перезапуска. В журнале питания после остановки ошибок нет."},
+        {"days_ago": 112, "kind": "software_update", "author": "demo", "source": "remote", "title": "Обновлено ПО контроллера", "equipment": "DEMO-CU-032", "software_version": "2.1.1", "text": "Версия сверена после перезапуска. Настройки восстановлены из резервной копии."},
+        {"days_ago": 62, "kind": "document", "author": "demo", "source": "email", "title": "Получен протокол контрольного прохода", "text": "В журнал внесены дата и итог контрольного прохода."},
+        {"days_ago": 19, "kind": "equipment_install", "author": "demo", "source": "site_visit", "title": "Установлен модуль с другой машины", "equipment": "DEMO-BP-031", "text": "Модуль поступил с машины DEMO-031 и прошёл контроль при установке."},
+        {"days_ago": 6, "kind": "request", "author": "demo", "source": "email", "title": "Уточнён график работ на полигоне", "contact": "Козлова Полина Денисовна", "text": "Дата следующего выезда согласована с диспетчером."}
+      ]
+    }
+  ]
+}
